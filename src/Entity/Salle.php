@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\SalleRepository")
+ */
+class Salle
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $nomSalle;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ordinateur;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $tabletteGraphique;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
+     */
+    private $meubler;
+
+    public function __construct()
+    {
+        $this->meubler = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNomSalle(): ?string
+    {
+        return $this->nomSalle;
+    }
+
+    public function setNomSalle(string $nomSalle): self
+    {
+        $this->nomSalle = $nomSalle;
+
+        return $this;
+    }
+
+    public function getOrdinateur(): ?int
+    {
+        return $this->ordinateur;
+    }
+
+    public function setOrdinateur(int $ordinateur): self
+    {
+        $this->ordinateur = $ordinateur;
+
+        return $this;
+    }
+
+    public function getTabletteGraphique(): ?int
+    {
+        return $this->tabletteGraphique;
+    }
+
+    public function setTabletteGraphique(int $tabletteGraphique): self
+    {
+        $this->tabletteGraphique = $tabletteGraphique;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getMeubler(): Collection
+    {
+        return $this->meubler;
+    }
+
+    public function addMeubler(Session $meubler): self
+    {
+        if (!$this->meubler->contains($meubler)) {
+            $this->meubler[] = $meubler;
+            $meubler->setSalle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeubler(Session $meubler): self
+    {
+        if ($this->meubler->contains($meubler)) {
+            $this->meubler->removeElement($meubler);
+            // set the owning side to null (unless already changed)
+            if ($meubler->getSalle() === $this) {
+                $meubler->setSalle(null);
+            }
+        }
+
+        return $this;
+    }
+}
