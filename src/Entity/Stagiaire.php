@@ -63,6 +63,11 @@ class Stagiaire
      */
     private $telephone;
 
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $cp;
+
     public function __construct()
     {
         $this->appartenir = new ArrayCollection();
@@ -191,6 +196,18 @@ class Stagiaire
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
 
         return $this;
     }

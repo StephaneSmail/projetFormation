@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/new", name="user_new")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(ObjectManager $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         // 1) build the form
         $user = new User();
@@ -36,13 +37,12 @@ class RegistrationController extends AbstractController
             $user->addRole("ROLE_USER");
             $user->addRole("ROLE_SUPER_ADMIN");
             // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('user_new');
         }
 
         return $this->render('registration/register.html.twig', [
