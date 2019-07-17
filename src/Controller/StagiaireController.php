@@ -110,7 +110,7 @@ class StagiaireController extends AbstractController
     /**
      * @Route("/pdf/{id}", name="stagiaire_pdf", methods={"GET"})
      */
-    public function pdf(stagiaire $stagiaire)
+    public function pdf(Stagiaire $stagiaire)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Atelier</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ atelier.programmer.nomAtelier }}</td>
+            </tr> 
+            <tr>
+                <th>Atelier</th>
+                <td>{{ atelier.nomAtelier }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+{% endblock %}
