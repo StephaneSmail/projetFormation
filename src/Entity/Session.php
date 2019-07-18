@@ -43,6 +43,11 @@ class Session
      */
     private $salle;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $promotion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Session
     public function setSalle(?Salle $salle): self
     {
         $this->salle = $salle;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?string
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(string $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }
