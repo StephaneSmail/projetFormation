@@ -1,0 +1,8 @@
+{% block body %}
+
+    <form method="post" action="{{ path('session_delete', {'id': session.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette session de formation?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ session.id) }}">
+        <button class="btn btn-danger">Effacer</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Session</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Initulé</th>
+                <td>
+            {% for formation in session.contenir %}
+                {{ formation.nomFormation ~"," }}
+            {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Promotion</th>
+                <td>{{ session.nomPromotion }}</td>
+            </tr>
+            <tr>
+                <th>NbPlaces</th>
+                <td>{{ session.NbPlaces }}</td>
+            </tr>
+            <tr>
+                <th>Date de début</th>
+                <td>{{ session.dateDebut }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ session.dateFin }}</td>
+            </tr>
+            
+            <tr>
+                <th>Salle</th>
+                <td>{{ session.salle }}</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+{% endblock %}
