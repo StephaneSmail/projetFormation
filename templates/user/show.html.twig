@@ -31,8 +31,16 @@
                 <td>{{ user.ville }}</td>
             </tr>
             <tr>
-                <th>cp</th>
+                <th>Code postal</th>
                 <td>{{ user.cp }}</td>
+            </tr>
+            <tr>
+                <th>Specialisation</th>
+                <td>
+            {% for categorie in user.enseigner %}
+                {{ categorie.nomCategorie ~"," }}
+            {% endfor %}
+                </td>
             </tr>
             
         </tbody>

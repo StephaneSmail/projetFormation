@@ -37,4 +37,8 @@ class Categorie
 
         return $this;
     }
+
+    public function __ToString(){
+        return $this->getNomCategorie();
+    }
 }
