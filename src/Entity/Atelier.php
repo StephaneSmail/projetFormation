@@ -22,8 +22,8 @@ class Atelier
     private $nomAtelier;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $programmer;
 

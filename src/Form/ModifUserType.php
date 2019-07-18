@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -47,6 +49,14 @@ class ModifUserType extends AbstractType
             ))
             ->add('email', EmailType::class)
             ->add('photo', UrlType::class)
+            ->add('enseigner', EntityType::class, [
+                'class' => Categorie::class,
+                'attr' =>[
+                    'class' => 'selectpicker',
+                    'multiple data-live-search'=>"true",
+                ],
+                'multiple' => true,    
+            ])
             ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
