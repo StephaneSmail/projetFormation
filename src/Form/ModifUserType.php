@@ -55,7 +55,8 @@ class ModifUserType extends AbstractType
                     'class' => 'selectpicker',
                     'multiple data-live-search'=>"true",
                 ],
-                'multiple' => true,    
+                'multiple' => true,
+                'choice_label' => 'nomCategorie'    
             ])
             ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;

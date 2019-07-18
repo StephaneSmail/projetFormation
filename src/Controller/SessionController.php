@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 class SessionController extends AbstractController
 {
     /**
-     * @Route("/", name="session_index", methods={"GET"})
+     * @Route("/", name="session_index")
      */
     public function index(SessionRepository $sessionRepository): Response
     {
@@ -31,7 +31,7 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="session_new", methods={"GET","POST"})
+     * @Route("/new", name="session_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
     {
@@ -70,7 +70,7 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="session_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="session_edit")
      */
     public function edit(Request $request, Session $session, ObjectManager $manager): Response
     {
@@ -79,7 +79,6 @@ class SessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->flush();
-            dump($form->get('contenir')->getData());
 
             return $this->redirectToRoute('session_index', [
                 'id' => $session->getId(),

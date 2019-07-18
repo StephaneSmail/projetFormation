@@ -22,7 +22,7 @@ use Dompdf\Options;
 class StagiaireController extends AbstractController
 {
     /**
-     * @Route("/", name="stagiaire_index", methods={"GET"})
+     * @Route("/", name="stagiaire_index")
      */
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
@@ -32,7 +32,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="stagiaire_new", methods={"GET","POST"})
+     * @Route("/new", name="stagiaire_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
     {
@@ -71,7 +71,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="stagiaire_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="stagiaire_edit")
      */
     public function edit(Request $request, Stagiaire $stagiaire, ObjectManager $manager): Response
     {
@@ -79,6 +79,7 @@ class StagiaireController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $manager->flush();
 
             return $this->redirectToRoute('stagiaire_index', [

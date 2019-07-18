@@ -66,7 +66,6 @@ class UserController extends AbstractController
             //on active par défaut
             // $user->setIsActive(true);
             // 4) save the User!
-            $entityManager->persist($user);
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
