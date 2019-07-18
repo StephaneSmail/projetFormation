@@ -26,7 +26,7 @@ class SessionController extends AbstractController
     public function index(SessionRepository $sessionRepository): Response
     {
         return $this->render('session/index.html.twig', [
-            'session' => $sessionRepository->findAll(),
+            'sessions' => $sessionRepository->findAll(),
         ]);
     }
 
@@ -35,8 +35,8 @@ class SessionController extends AbstractController
      */
     public function new(Request $request,ObjectManager $manager): Response
     {
-        $formation = new session();
-        $form = $this->createForm(SessionType::class, $formation);
+        $session = new Session();
+        $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,6 +79,7 @@ class SessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->flush();
+            dump($form->get('contenir')->getData());
 
             return $this->redirectToRoute('session_index', [
                 'id' => $session->getId(),

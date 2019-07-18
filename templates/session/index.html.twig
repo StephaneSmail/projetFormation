@@ -4,4 +4,31 @@
 
 {% block body %}
 
+<a href="{{ path('session_new') }}" class="btn btn-primary"> Ajouter une session </a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Intitulé</th>
+                <th>Promotion</th>
+                <th>Date de début</th>
+                <th>Date de Fin</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.contenir.nomFormation }}</td>
+                <td>{{ session.Promotion }}</td>
+                <td>{{ session.dateDebut.format( 'd/m/y') }}</td>
+                <td>{{ session.dateFin.format( 'd/m/y') }}</td>
+
+                <td><a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-warning"> Modifier</a></td>
+                <td>{{ include('session/delete.html.twig') }}</td>
+            </tr>
+        {% endfor %}
 {% endblock %}
