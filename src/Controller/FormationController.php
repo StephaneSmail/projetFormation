@@ -73,7 +73,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="formation_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="formation_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Formation $formation, ObjectManager $manager): Response
     {
