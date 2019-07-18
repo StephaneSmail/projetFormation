@@ -19,11 +19,11 @@
         {% for stagiaire in stagiaires %}
             <tr class="table-primary">
                 
-                <td >{{ stagiaire.nom }}</td>
-                <td>{{ stagiaire.prenom }}</td>
-                <td>{{ stagiaire.dateNaissance ? stagiaire.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a></td>
+                <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a></td>
+                <td>{{ stagiaire.dateNaissance ? stagiaire.dateNaissance|date('d-m-Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">show</a>
+                    
                     <a href="{{ path('stagiaire_edit', {'id': stagiaire.id}) }}">edit</a>
                     <a href="{{ path('stagiaire_pdf', {'id': stagiaire.id}) }}">PDF</a>
                 </td>

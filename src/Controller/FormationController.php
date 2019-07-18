@@ -61,13 +61,11 @@ class FormationController extends AbstractController
     /**
      * @Route("/{id}", name="formation_show", methods={"GET"})
      */
-    public function show(Formation $formation): Response
-
-    {
+    public function show(Formation $formation): Response{
 
 
-        return $this->render('stagiaire/show.html.twig', [
-            'stagiaire' => $stagiaire,
+        return $this->render('formation/show.html.twig', [
+            'formation' => $formation,
              
         ]);
     }

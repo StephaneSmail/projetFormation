@@ -16,6 +16,10 @@
                 <td>{{ stagiaire.prenom }}</td>
             </tr>
             <tr>
+                <th>Date de naissance</th>
+                <td>{{ stagiaire.dateNaissance.format('d/m/Y') }}</td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{{ stagiaire.email }}</td>
             </tr>
@@ -37,8 +41,19 @@
             </tr>
             <tr>
                 <th>Sexe</th>
-                <td>{{ stagiaire.sexe }}</td>
+                {% if stagiaire.sexe == 'M' %}
+                
+                <td>Homme</td>
+
+                {% else %}
+
+                <td>Femme</td>
+
+                {% endif %}   
             </tr>
+
+            
+            
             
         </tbody>
     </table>
