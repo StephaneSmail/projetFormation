@@ -29,7 +29,9 @@ class SessionType extends AbstractType
                 'class' => Salle::class,
                 'choice_label' => 'nomSalle'
             ])
-            ->add('Prout', SubmitType::class)
+            
+            ->add('Submit', SubmitType::class)
+            
             
            
         ;

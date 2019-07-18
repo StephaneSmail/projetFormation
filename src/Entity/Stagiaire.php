@@ -53,10 +53,7 @@ class Stagiaire
      */
     private $sexe;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Session")
-     */
-    private $appartenir;
+  
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -68,9 +65,40 @@ class Stagiaire
      */
     private $cp;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="stagiaires")
+     */
+    private $sessions;
+
     public function __construct()
     {
-        $this->appartenir = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->contains($session)) {
+            $this->sessions->removeElement($session);
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -162,32 +190,6 @@ class Stagiaire
         return $this;
     }
 
-    /**
-     * @return Collection|Session[]
-     */
-    public function getAppartenir(): Collection
-    {
-        return $this->appartenir;
-    }
-
-    public function addAppartenir(Session $appartenir): self
-    {
-        if (!$this->appartenir->contains($appartenir)) {
-            $this->appartenir[] = $appartenir;
-        }
-
-        return $this;
-    }
-
-    public function removeAppartenir(Session $appartenir): self
-    {
-        if ($this->appartenir->contains($appartenir)) {
-            $this->appartenir->removeElement($appartenir);
-        }
-
-        return $this;
-    }
-
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -211,4 +213,7 @@ class Stagiaire
 
         return $this;
     }
+
+    
+   
 }
