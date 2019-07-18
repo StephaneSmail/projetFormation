@@ -79,7 +79,7 @@ class SessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->flush();
-            dump($form->get('contenir')->getData());
+            $form->get('contenir')->getData();
 
             return $this->redirectToRoute('session_index', [
                 'id' => $session->getId(),
