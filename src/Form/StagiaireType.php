@@ -22,6 +22,15 @@ class StagiaireType extends AbstractType
             ->add('dateNaissance', DateType::class)
             ->add('adresse', TextType::class)
             ->add('ville', TextType::class)
+            ->add('cp', TextType::class, array(
+                'label' => 'Code Postal',
+                'constraints' => new Length([
+                    'min' => 4,
+                    'minMessage' => "Veuillez mettre plus de {{ limit }} characters",
+                    'max' => 12,
+                    'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
+                ]),
+            ))
             ->add('email', EmailType::class)
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
@@ -29,8 +38,15 @@ class StagiaireType extends AbstractType
                     'Femme' => 'F',
                 ]    
             ])
-            ->add('telephone', TelType::class)
-            ->add('cp', TextType::class)
+            ->add('telephone', TelType::class,array(
+                'constraints' => new Length([
+                    'min' => 10,
+                    'minMessage' => "Veuillez mettre plus de {{ limit }} characters",
+                    'max' => 32,
+                    'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
+                ]),
+            ))
+            
         ;
     }
 

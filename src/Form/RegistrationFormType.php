@@ -62,7 +62,7 @@ class RegistrationFormType extends AbstractType
                 'first_options' => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Confirmation du mot de passe'),
                 'constraints' => new Length([
-                    'min' => 4,
+                    'min' => 6,
                     'minMessage' => "Veuillez mettre plus de {{ limit }} characters",
                     'max' => 16,
                     'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
