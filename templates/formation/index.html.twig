@@ -10,9 +10,12 @@
             <tr>
                 
                 <th>Intitulé</th>
-                
-                
-                <th>actions</th>
+
+                {% if is_granted('ROLE_ADMIN') %}
+
+                <th colspan = '2'>Actions</th>
+
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -21,11 +24,18 @@
                 
                 <td><a href="{{ path('formation_show', {'id': formation.id}) }}">{{ formation.nomFormation }}</a></td>
                 
-                <td>
-                    
-                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>
+                <td>   
                     <a href="{{ path('formation_pdf', {'id': formation.id}) }}">PDF</a>
+                
+                {% if is_granted('ROLE_ADMIN') %}
+
+                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">Modifier</a>
                 </td>
+                <td>
+                    {{ include('formation/delete_form.html.twig') }}
+                </td>
+                
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -35,5 +45,10 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_ADMIN') %}
+
     <a href="{{ path('formation_new') }}">Create new</a>
+
+    {% endif %}
+    
 {% endblock %}

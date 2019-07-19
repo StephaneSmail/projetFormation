@@ -13,10 +13,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/utilisateur")
  */
 class UserController extends AbstractController
@@ -42,6 +44,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route ("/delete/{id}", name="user_delete", methods={"DELETE"})
      */
      public function delete(User $user, ObjectManager $manager, Request $request): Response {
@@ -54,6 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/edit/{id}", name="user_edit")
      */
     public function edit(User $user, ObjectManager $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response{

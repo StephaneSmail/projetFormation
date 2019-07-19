@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
 use App\Repository\StagiaireRepository;
@@ -9,14 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 // Include Dompdf required namespaces
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/stagiaire")
  */
 class StagiaireController extends AbstractController
@@ -32,6 +34,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="stagiaire_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
@@ -71,6 +74,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/edit", name="stagiaire_edit")
      */
     public function edit(Request $request, Stagiaire $stagiaire, ObjectManager $manager): Response
@@ -94,6 +98,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="stagiaire_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Stagiaire $stagiaire): Response
