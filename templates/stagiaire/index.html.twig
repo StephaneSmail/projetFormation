@@ -9,8 +9,7 @@
         <thead>
             <tr>
                 
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
+                <th scope="col">Stagiaire</th>
                 <th scope="col">dateNaissance</th>
                 <th scope="col">actions</th>
             </tr>
@@ -19,8 +18,7 @@
         {% for stagiaire in stagiaires %}
             <tr class="table-primary">
                 
-                <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a></td>
-                <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a></td>
+                <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.nom ~" "~ stagiaire.prenom }}</a></td>
                 <td>{{ stagiaire.dateNaissance ? stagiaire.dateNaissance|date('d-m-Y') : '' }}</td>
                 <td>
                     

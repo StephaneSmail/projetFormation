@@ -24,7 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FormationController extends AbstractController
 {
     /**
-     * @Route("/", name="formation_index", methods={"GET"})
+     * @Route("/", name="formation_index")
      */
     public function index(FormationRepository $formationRepository): Response
     {
@@ -34,7 +34,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="formation_new", methods={"GET","POST"})
+     * @Route("/new", name="formation_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
     {
