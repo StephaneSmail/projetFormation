@@ -66,7 +66,7 @@ class Stagiaire
     private $cp;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="stagiaires")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Session", mappedBy="stagiaires")
      */
     private $sessions;
 

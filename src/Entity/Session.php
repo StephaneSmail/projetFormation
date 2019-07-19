@@ -51,7 +51,7 @@ class Session
     private $promotion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="sessions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", inversedBy="sessions")
      */
     private $stagiaires;
 
