@@ -12,28 +12,38 @@
             {% for formation in session.contenir %}
                 {{ formation.nomFormation ~"," }}
             {% endfor %}
+            
                 </td>
             </tr>
             <tr>
                 <th>Promotion</th>
-                <td>{{ session.nomPromotion }}</td>
+                <td>{{ session.Promotion }}</td>
             </tr>
             <tr>
                 <th>NbPlaces</th>
-                <td>{{ session.NbPlaces }}</td>
+                <td>{{ session.NbPlace }}</td>
             </tr>
             <tr>
                 <th>Date de début</th>
-                <td>{{ session.dateDebut }}</td>
+                <td>{{ session.dateDebut.format('d/m/Y') }}</td>
             </tr>
             <tr>
                 <th>DateFin</th>
-                <td>{{ session.dateFin }}</td>
+                <td>{{ session.dateFin.format('d/m/Y') }}</td>
             </tr>
             
             <tr>
                 <th>Salle</th>
-                <td>{{ session.salle }}</td>
+                <td>{{ session.salle.nomSalle }}</td>
+            </tr>
+            <tr>
+                <th>Stagiaires</th>
+                <td>
+                
+            {% for st in session.stagiaires %}
+                {{ st }}
+            {% endfor %}
+                </td>
             </tr>
             
             

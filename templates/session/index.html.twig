@@ -24,9 +24,10 @@
             <tr>
                 <td>{{ session.contenir.nomFormation }}</td>
                 <td>{{ session.Promotion }}</td>
-                <td>{{ session.dateDebut.format( 'd/m/y') }}</td>
-                <td>{{ session.dateFin.format( 'd/m/y') }}</td>
+                <td>{{ session.dateDebut.format( 'd/m/Y') }}</td>
+                <td>{{ session.dateFin.format( 'd/m/Y') }}</td>
 
+                <td><a href="{{ path('session_show', {'id':session.id}) }}" class="btn btn-success"> Details</a></td>
                 <td><a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-warning"> Modifier</a></td>
                 <td>{{ include('session/delete.html.twig') }}</td>
             </tr>
