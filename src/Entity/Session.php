@@ -23,6 +23,7 @@ class Session
      */
     private $nbPlace;
 
+    private $nbPlaceRestantes;
     /**
      * @ORM\Column(type="date")
      */
@@ -58,6 +59,7 @@ class Session
     public function __construct()
     {
         $this->stagiaires = new ArrayCollection();
+        $this->nbPlaceRestantes = $this->nbPlace;
     }
 
     public function getId(): ?int
@@ -147,8 +149,9 @@ class Session
 
     public function addStagiaire(Stagiaire $stagiaire): self
     {
-        if (!$this->stagiaires->contains($stagiaire)) {
+        if (!$this->stagiaires->contains($stagiaire) && $this->nbPlaceRestantes > 0) {
             $this->stagiaires[] = $stagiaire;
+            $this->nbPlaceRestantes--;
             $stagiaire->addSession($this);
         }
 
@@ -159,6 +162,7 @@ class Session
     {
         if ($this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->removeElement($stagiaire);
+            $this->NbPlaceRestantes++;
             $stagiaire->removeSession($this);
         }
 

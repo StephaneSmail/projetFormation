@@ -12,7 +12,8 @@
                 <th>Promotion</th>
                 <th>Date de début</th>
                 <th>Date de Fin</th>
-                <th>Modifier</th>
+                <th>NbPlaces</th>
+                <th>Places Restantes</th>
                 <th>Supprimer</th>
                 
             </tr>
@@ -26,6 +27,8 @@
                 <td>{{ session.Promotion }}</td>
                 <td>{{ session.dateDebut.format( 'd/m/Y') }}</td>
                 <td>{{ session.dateFin.format( 'd/m/Y') }}</td>
+                <td>{{ session.nbPlace }}</td>
+                <td>{{ session.nbPlace - session.stagiaires|length}}</td>
 
                 <td><a href="{{ path('session_show', {'id':session.id}) }}" class="btn btn-success"> Details</a></td>
                 <td><a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-warning"> Modifier</a></td>

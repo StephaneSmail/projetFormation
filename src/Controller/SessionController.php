@@ -35,13 +35,18 @@ class SessionController extends AbstractController
      */
     public function new(Request $request,ObjectManager $manager): Response
     {
+
+
         $session = new Session();
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($session);
             $entityManager->flush();
@@ -78,6 +83,8 @@ class SessionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
             $manager->flush();
             $form->get('contenir')->getData();
             $form->get('stagiaires')->getData();

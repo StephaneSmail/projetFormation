@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Atelier;
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +15,7 @@ class CategorieType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('nomCategorie', TextType::class)
+           
             ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']]);
     }
 

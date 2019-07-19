@@ -1,5 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{form(form)}}
+   {{ form_start(form) }}
+
+        {{form_row(form.contenir) }}
+        {{form_row(form.Promotion) }}
+        {{form_row(form.nbPlace) }}
+        {{form_row(form.dateDebut) }}
+        {{form_row(form.dateFin) }}
+        {{form_row(form.salle) }}
+   
+
+
+    <ul id="collections" data-prototype= "{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
+        {% for stagiaire in form.stagiaires %}
+            <li class="collection">{{ form_row(stagiaire) }}</li>
+        {% endfor %}
+    </ul>
+      {{form_row(form.submit) }}
+{{ form_end(form) }}
+
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="/js/collectionHandler.js"></script>
+{% endblock %}
+
+
