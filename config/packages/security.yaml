@@ -14,6 +14,7 @@ security:
     firewalls:
         main:
             pattern:   ^/
+            access_denied_handler: App\Security\AccessDeniedHandler
             http_basic: ~
             provider: our_db_provider
             anonymous: ~
@@ -22,7 +23,7 @@ security:
                 check_path: app_login
             logout:
                 path:   /logout
-                target: /
+                target: /login
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
@@ -36,3 +37,4 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/member, roles: ROLE_USER }
+        - { path: ^/superadmin, roles: ROLE_SUPER_ADMIN }

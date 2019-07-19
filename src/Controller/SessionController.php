@@ -8,14 +8,16 @@ use App\Controller\SessionController;
 use App\Repository\SessionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/session")
  */
 class SessionController extends AbstractController
@@ -31,6 +33,7 @@ class SessionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="session_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
@@ -70,6 +73,7 @@ class SessionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/edit", name="session_edit")
      */
     public function edit(Request $request, Session $session, ObjectManager $manager): Response
@@ -94,6 +98,7 @@ class SessionController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="session_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Session $session): Response

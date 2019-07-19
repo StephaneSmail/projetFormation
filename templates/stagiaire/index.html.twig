@@ -11,7 +11,7 @@
                 
                 <th scope="col">Stagiaire</th>
                 <th scope="col">dateNaissance</th>
-                <th scope="col">actions</th>
+                <th scope="col" colspan='2'>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +21,12 @@
                 <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.nom ~" "~ stagiaire.prenom }}</a></td>
                 <td>{{ stagiaire.dateNaissance ? stagiaire.dateNaissance|date('d-m-Y') : '' }}</td>
                 <td>
-                    
-                    <a href="{{ path('stagiaire_edit', {'id': stagiaire.id}) }}">edit</a>
                     <a href="{{ path('stagiaire_pdf', {'id': stagiaire.id}) }}">PDF</a>
-                </td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('stagiaire_edit', {'id': stagiaire.id}) }}">edit</a>
+                    </td>
+                    <td>{{ include('stagiaire/delete_form.html.twig') }}</td>
+                    {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -33,6 +35,10 @@
         {% endfor %}
         </tbody>
     </table>
+    
+    {% if is_granted('ROLE_ADMIN') %}
 
     <a href="{{ path('stagiaire_new') }}">Create new</a>
+
+    {% endif %}
 {% endblock %}

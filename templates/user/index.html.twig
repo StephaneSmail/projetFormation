@@ -6,14 +6,21 @@
 
 {% block body %}
 
-<a href="{{ path('user_new') }}" class="btn btn-primary"> Ajouter un utilisateur </a>
+    {% if is_granted('ROLE_ADMIN') %}
+
+    <a href="{{ path('user_new') }}" class="btn btn-primary"> Ajouter un utilisateur </a>
+
+    {% endif %}
+
     <table class="table">
         <thead>
             <tr>
                 <th>Formateur</th>
                 <th>Date d'entrée</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Modifier</th>
                 <th>Supprimer</th>
+                {% endif %}
                 
             </tr>
         </thead>
@@ -21,12 +28,20 @@
         <tbody>
 
         {% for user in users %}
-            <tr>
+
+            {% if 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles  %}
+                <tr>
                 <td><a href="{{ path('user_show', {'id':user.id}) }}">{{ user.nom ~" "~ user.prenom }}</a></td>
                 <td>{{ user.dateEntree.format( 'd/m/y') }}</td>
-                <td><a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-warning"> Modifier</a></td>
-                <td>{{ include('user/delete.html.twig') }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+        
+                    <td><a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-warning"> Modifier</a></td>
+                    <td>{{ include('user/delete.html.twig') }}</td>
+
+                {% endif %}
             </tr>
+            {% endif %}
+                     
         {% endfor %}
 
         </tbody>

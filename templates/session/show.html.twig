@@ -9,10 +9,7 @@
             <tr>
                 <th>Initulé</th>
                 <td>
-            {% for formation in session.contenir %}
-                {{ formation.nomFormation ~"," }}
-            {% endfor %}
-            
+                {{ session.contenir.nomFormation}}
                 </td>
             </tr>
             <tr>

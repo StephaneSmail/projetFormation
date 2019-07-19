@@ -16,9 +16,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 // Include Dompdf required namespaces
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/formation")
  */
 class FormationController extends AbstractController
@@ -34,6 +36,7 @@ class FormationController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="formation_new")
      */
     public function new(Request $request,ObjectManager $manager): Response
@@ -71,7 +74,8 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="formation_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/edit/{id}", name="formation_edit")
      */
     public function edit(Request $request, Formation $formation, ObjectManager $manager): Response
     {
@@ -93,6 +97,7 @@ class FormationController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="formation_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Formation $formation): Response

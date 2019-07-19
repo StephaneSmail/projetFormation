@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_SUPER_ADMIN")
      * @Route("/new", name="user_new")
      */
     public function register(ObjectManager $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
@@ -35,14 +37,14 @@ class RegistrationController extends AbstractController
             //on active par défaut
             // $user->setIsActive(true);
             $user->addRole("ROLE_USER");
-            $user->addRole("ROLE_SUPER_ADMIN");
+            $user->addRole("ROLE_ADMIN");
             // 4) save the User!
             $entityManager->persist($user);
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
-            return $this->redirectToRoute('user_new');
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render('registration/register.html.twig', [

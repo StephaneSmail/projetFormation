@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/atelier")
  */
 class AtelierController extends AbstractController
@@ -29,6 +31,7 @@ class AtelierController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="atelier_new")
      * @Route("/edit/{id}", name="atelier_edit")
      */
@@ -66,6 +69,7 @@ class AtelierController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="atelier_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Atelier $atelier): Response

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -18,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategorieController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="categorie_index")
      */
     public function index(CategorieRepository $categorieRepository): Response
@@ -28,6 +30,7 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="categorie_new")
      * @Route("/edit/{id}", name="categorie_edit")
      */
@@ -65,6 +68,7 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="categorie_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Categorie $categorie): Response
