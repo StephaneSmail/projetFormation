@@ -46,6 +46,7 @@ class StagiaireType extends AbstractType
                     'max' => 32,
                     'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
                 ]),
+            
             ))
             
         ;

@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Formation</h1>
 
-    {{ include('formation/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('formation/form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('formation_index') }}">back to list</a>
 
-    {{ include('formation/_delete_form.html.twig') }}
+    {{ include('formation/delete_form.html.twig') }}
 {% endblock %}
