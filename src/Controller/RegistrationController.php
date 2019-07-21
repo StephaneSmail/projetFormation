@@ -36,8 +36,8 @@ class RegistrationController extends AbstractController
             );
             //on active par défaut
             // $user->setIsActive(true);
-            $user->addRole("ROLE_USER");
-            $user->addRole("ROLE_ADMIN");
+            // $user->addRole("ROLE_USER");
+            // $user->addRole("ROLE_ADMIN");
             // 4) save the User!
             $entityManager->persist($user);
             $entityManager->flush();

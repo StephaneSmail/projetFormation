@@ -51,9 +51,14 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class)
             ->add('photo', UrlType::class)
             ->add('roles', ChoiceType::class, [
+                'attr' =>[
+                    'class' => 'selectpicker',
+                    'multiple data-live-search'=>"true",
+                ],
                 'choices' => [
                     'user' => 'ROLE_USER',
                     'admin' => 'ROLE_ADMIN',
+                    'super admin' => 'ROLE_SUPER_ADMIN'
                 ],
                 'multiple' => true,   
             ])

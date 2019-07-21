@@ -77,7 +77,7 @@ class User implements UserInterface
      */
     private $telephone;
 
-    /**mysql --version
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
