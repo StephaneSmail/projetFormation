@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +29,17 @@ class Atelier
      */
     private $programmer;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Duree", mappedBy="ateliers", orphanRemoval=true)
+     */
+    private $duree;
+
+    public function __construct()
+    {
+        $this->duree = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -55,4 +68,42 @@ class Atelier
 
         return $this;
     }
+
+    /**
+     * @return Collection|Duree[]
+     */
+    public function getDuree(): Collection
+    {
+        return $this->duree;
+    }
+
+    public function addDuree(Duree $duree): self
+    {
+        if (!$this->duree->contains($duree)) {
+            $this->duree[] = $duree;
+            $duree->setAteliers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDuree(Duree $duree): self
+    {
+        if ($this->duree->contains($duree)) {
+            $this->duree->removeElement($duree);
+            // set the owning side to null (unless already changed)
+            if ($duree->getAteliers() === $this) {
+                $duree->setAteliers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __ToString(){
+        return 
+        $this->getNomAtelier();
+
+
+}
 }

@@ -5,9 +5,12 @@
 {% block body %}
     <h1>Edit Stagiaire</h1>
 
-    {{ include('stagiaire/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('stagiaire/form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <a href="/" class="card-link">Ajouter ateliers</a>
 
     <a href="{{ path('stagiaire_index') }}">back to list</a>
 
-    {{ include('stagiaire/_delete_form.html.twig') }}
+    {{ include('stagiaire/delete_form.html.twig') }}
 {% endblock %}

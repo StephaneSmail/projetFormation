@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Duree;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,17 +25,17 @@ class Duree
      */
     private $nbJour;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Atelier")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $dureeAtelier;
+
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Formation")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Formation", inversedBy="duree", cascade={"persist"})
      */
-    private $dureeFormation;
+    private $formations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Atelier", inversedBy="duree", cascade={"persist"})
+     */
+    private $ateliers;
 
     public function getId(): ?int
     {
@@ -50,27 +54,35 @@ class Duree
         return $this;
     }
 
-    public function getDureeAtelier(): ?Atelier
+    
+
+    public function getFormations(): ?Formation
     {
-        return $this->dureeAtelier;
+        return $this->formations;
     }
 
-    public function setDureeAtelier(?Atelier $dureeAtelier): self
+    public function setFormations(?Formation $formations): self
     {
-        $this->dureeAtelier = $dureeAtelier;
+        $this->formations = $formations;
 
         return $this;
     }
 
-    public function getDureeFormation(): ?Formation
+    public function getAteliers(): ?Atelier
     {
-        return $this->dureeFormation;
+        return $this->ateliers;
     }
 
-    public function setDureeFormation(?Formation $dureeFormation): self
+    public function setAteliers(?Atelier $ateliers): self
     {
-        $this->dureeFormation = $dureeFormation;
+        $this->ateliers = $ateliers;
 
         return $this;
+    }
+
+    public function __ToString(){
+        return 
+        $this->getAteliers().''.$this->getNbJour();
+        
     }
 }

@@ -16,9 +16,16 @@
                 <th>Descriptif</th>
                 <td>{{ formation.descriptif }}</td>
             </tr>
-            
+            <tr>
+                <th>Ateliers</th>
+                <td>{% for atelier in formation.duree %}
+                {{ atelier }}
+            {% endfor %}
+            </tr>
         </tbody>
     </table>
+
+     <a href="{{ path('add_atelier', {'id': formation.id}) }}">ajouter atelier</a>
 
     <a href="{{ path('formation_index') }}">Retour liste formations</a>
 

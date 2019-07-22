@@ -2,33 +2,40 @@
 
 namespace App\Form;
 
-use App\Entity\Duree;
-use App\Entity\Atelier;
-use App\Entity\Categorie;
-use App\Entity\Formation;
+
+
+use App\Entity\Contact;
+
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class FormationType extends AbstractType
+
+class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomFormation', TextType::class)
-            ->add('descriptif', TextareaType::class);
-          
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('phone', TextType::class)
+            ->add('email', TextType::class)
+            ->add('message', TextareaType::class)
+            
+            
+                
+         ;      
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Formation::class,
+            'data_class' => Contact::class,
         ]);
     }
 }

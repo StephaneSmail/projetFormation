@@ -4,16 +4,19 @@ namespace App\Controller;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\Duree;
+use App\Entity\Atelier;
 use App\Entity\Formation;
+use App\Form\AteliersType;
 use App\Form\FormationType;
-use App\Repository\FormationRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 
 
 
 
 // Include Dompdf required namespaces
+use App\Repository\FormationRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,6 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @Route("/formation")
  */
 class FormationController extends AbstractController
+
 {
     /**
      * @Route("/", name="formation_index")
@@ -47,9 +51,20 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
+
+            $atelier = $form->get('atelier')->getData();
+            $nbJours = $form->get('nbJours')->getData();
+            $duree = new Duree();
+            $duree->setNbJour($nbJours)
+                    ->setFormations($formation)
+                    ->setAteliers($atelier);
+
+            $entityManager->persist($duree);
+            
+       
+            
             $entityManager->flush();
 
             return $this->redirectToRoute('formation_index');
@@ -83,7 +98,14 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+
+           
             $manager->flush();
+           
+           
+            
+
 
             return $this->redirectToRoute('formation_index', [
                 'id' => $formation->getId(),
@@ -143,5 +165,38 @@ class FormationController extends AbstractController
             "Attachment" => false
         ]);
     }
+
+    
+    /**
+     * @Route("/addAtelier/{id}", name="add_atelier" )
+     */
+    public function addAtelierToFormation (Atelier $atelier,Formation $formation, Request $request, ObjectManager $manager)
+        {
+        
+           
+            $form = $this->createForm('App\Form\AteliersType', $formation);
+
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+    
+               
+                $manager->persist($formation);
+               
+                
+           
+                
+                $manager->flush();
+    
+                return $this->redirectToRoute('formation_index');
+            }
+    
+            return $this->render('duree/index.html.twig', [
+                'formation' => $formation,
+                'form' => $form->createView(),
+            ]);
+        }
+
+
 }
 

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DureeController!{% endblock %}
+
+{% block body %}
+    
+    <h2>{{formation.nomFormation}}</h3>
+    {{form_start(form)}}
+
+        <input type="hidden" id"maxNb" value=30>
+
+        <ul id="gestionDurees" data-prototype= "{{ form_row(form.duree.vars.prototype)|e('html_attr') }}">
+        {% for atelier in form.duree %}
+            <li>{{ form_row(atelier) }}</li>
+        {% endfor %}
+    </ul>
+      {{form_row(form.submit) }}
+{{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="/js/collectionHandlerDuree.js"></script>
+{% endblock %}
+

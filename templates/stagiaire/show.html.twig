@@ -51,6 +51,15 @@
 
                 {% endif %}   
             </tr>
+            <tr>
+                <th>Sessions</th>
+                <td>
+                
+            {% for session in stagiaire.sessions %}
+                {{ session }}
+            {% endfor %}
+                </td>
+            </tr>
 
             
             
