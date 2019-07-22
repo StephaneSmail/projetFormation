@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ResourceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SalleRepository")
  */
-class Ressource
+class Salle
 {
     /**
      * @ORM\Id()
@@ -34,7 +34,7 @@ class Ressource
     private $tabletteGraphique;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="ressource", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
      */
     private $meubler;
 

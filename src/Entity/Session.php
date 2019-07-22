@@ -41,10 +41,10 @@ class Session
     private $contenir;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ressource", inversedBy="meubler")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Salle", inversedBy="meubler")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $ressources;
+    private $salle;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -115,14 +115,14 @@ class Session
         return $this;
     }
 
-    public function getRessource(): ?Ressource
+    public function getSalle(): ?Salle
     {
-        return $this->eessource;
+        return $this->salle;
     }
 
-    public function setRessource(?Ressource $ressource): self
+    public function setSalle(?Salle $salle): self
     {
-        $this->ressource = $ressource;
+        $this->salle = $salle;
 
         return $this;
     }
