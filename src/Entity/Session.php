@@ -120,7 +120,7 @@ class Session
         return $this->salle;
     }
 
-    public function setSalles(?Salle $salle): self
+    public function setSalle(?Salle $salle): self
     {
         $this->salle = $salle;
 
