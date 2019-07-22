@@ -84,7 +84,7 @@ class RegistrationFormType extends AbstractType
                     'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
                 ]),
             ))
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('submit', SubmitType::class, ['label'=>'Inscrire', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 

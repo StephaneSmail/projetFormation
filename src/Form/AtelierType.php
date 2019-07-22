@@ -23,7 +23,7 @@ class AtelierType extends AbstractType
                 }
             ])
 
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']]);
+            ->add('submit', SubmitType::class, ['label'=>'Créer', 'attr'=>['class'=>'btn-primary btn-block']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

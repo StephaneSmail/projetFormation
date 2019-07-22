@@ -71,7 +71,7 @@ class ModifUserType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'nomCategorie'    
             ])
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('submit', SubmitType::class, ['label'=>'Modifier', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 

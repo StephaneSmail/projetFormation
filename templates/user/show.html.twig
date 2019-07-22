@@ -45,4 +45,11 @@
             
         </tbody>
     </table>
+
+    {% if app.user.email == user.email  %}
+    
+        <a href="{{ path('user_pass', {'id':user.id} ) }}"> Modifier mon mot de passe</a>
+    
+    {% endif %}
+
 {% endblock %}

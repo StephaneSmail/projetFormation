@@ -5,6 +5,13 @@
 
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     {% if is_granted('ROLE_ADMIN') %}
 
@@ -18,7 +25,7 @@
                 <th>Formateur</th>
                 <th>Date d'entrée</th>
                 {% if is_granted('ROLE_ADMIN') %}
-                <th>Niveau<th>
+                <th>Niveau</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
                 {% endif %}
@@ -35,7 +42,7 @@
                 <td><a href="{{ path('user_show', {'id':user.id}) }}">{{ user.nom ~" "~ user.prenom }}</a></td>
                 <td>{{ user.dateEntree.format( 'd/m/y') }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td>            
+                <td>            
                     {% for role in user.roles %}
                         {{ role ~"," }}
                     {% endfor %}
