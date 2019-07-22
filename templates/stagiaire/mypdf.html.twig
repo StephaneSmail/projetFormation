@@ -1,5 +1,9 @@
 <h1>Certificat de reussite</h1>
 
+    {% for session in stagiaire.sessions %}
+        {{session.promotion}}
+    {% endfor %}
+
     <table class="table">
         <tbody>
             <tr>
