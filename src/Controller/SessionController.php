@@ -79,7 +79,7 @@ class SessionController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/{id}/edit", name="session_edit")
+     * @Route("/edit/{id}", name="session_edit")
      */
     public function edit(Request $request, Session $session, ObjectManager $manager): Response
     {

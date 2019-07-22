@@ -8,9 +8,15 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user %}
-        <div class="checkbox mb-3">Vous êtes déjà connecté  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-    {% endif %}
+    
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }} alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     
 
@@ -39,8 +45,16 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
+    
+    {% if app.user %}
+        <div class="checkbox mb-3">Vous êtes déjà connecté  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {% else %}
+        <button class="btn btn-lg btn-primary" type="submit">
+            Connexion
+        </button>
+    {% endif %}
+    <div>
+        <a  href="{{ path('forgotten_password') }}">Forgotten password</a>
+    </div>
 </form>
 {% endblock %}

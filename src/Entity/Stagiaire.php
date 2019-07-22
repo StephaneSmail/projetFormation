@@ -53,7 +53,6 @@ class Stagiaire
      */
     private $sexe;
 
-  
 
     /**
      * @ORM\Column(type="string", length=32)

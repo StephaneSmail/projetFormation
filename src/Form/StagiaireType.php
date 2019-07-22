@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
 {
@@ -48,6 +49,7 @@ class StagiaireType extends AbstractType
                 ]),
             
             ))
+            ->add('submit', SubmitType::class, ['label'=>'Inscrire', 'attr'=>['class'=>'btn-primary btn-block']])
             
         ;
     }

@@ -38,6 +38,12 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string le token qui servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie")
      */
     private $enseigner;
@@ -77,7 +83,7 @@ class User implements UserInterface
      */
     private $telephone;
 
-    /**mysql --version
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
@@ -288,6 +294,30 @@ class User implements UserInterface
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get le token qui servira lors de l'oubli de mot de passe
+     *
+     * @return  string
+     */ 
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * Set le token qui servira lors de l'oubli de mot de passe
+     *
+     * @param  string  $resetToken  le token qui servira lors de l'oubli de mot de passe
+     *
+     * @return  self
+     */ 
+    public function setResetToken(string $resetToken)
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

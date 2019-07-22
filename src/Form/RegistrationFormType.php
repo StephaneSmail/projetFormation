@@ -51,9 +51,14 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class)
             ->add('photo', UrlType::class)
             ->add('roles', ChoiceType::class, [
+                'attr' =>[
+                    'class' => 'selectpicker',
+                    'multiple data-live-search'=>"true",
+                ],
                 'choices' => [
                     'user' => 'ROLE_USER',
                     'admin' => 'ROLE_ADMIN',
+                    'super admin' => 'ROLE_SUPER_ADMIN'
                 ],
                 'multiple' => true,   
             ])
@@ -79,7 +84,7 @@ class RegistrationFormType extends AbstractType
                     'maxMessage' => "Veuillez ne pas mettre plus de {{ limit }} characters"
                 ]),
             ))
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('submit', SubmitType::class, ['label'=>'Inscrire', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 
