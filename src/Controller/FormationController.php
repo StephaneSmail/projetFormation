@@ -31,12 +31,14 @@ class FormationController extends AbstractController
 
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="formation_index")
      */
     public function index(FormationRepository $formationRepository): Response
     {
         return $this->render('formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
+            'title' => 'Formation'
         ]);
     }
 
@@ -60,16 +62,16 @@ class FormationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
 
-            $atelier = $form->get('atelier')->getData();
-            $nbJours = $form->get('nbJours')->getData();
-            $duree = new Duree();
-            $duree->setNbJour($nbJours)
-                    ->setFormations($formation)
-                    ->setAteliers($atelier);
+            // $atelier = $form->get('atelier')->getData();
+            // $nbJours = $form->get('nbJours')->getData();
+            // $duree = new Duree();
+            // $duree->setNbJour($nbJours)
+            //         ->setFormations($formation)
+            //         ->setAteliers($atelier);
 
-            $entityManager->persist($duree);
-            
-       
+            $this->addFlash('success', 'Vous avez bien rajouté une formation');
+
+            $entityManager->persist($formation);
             
             $entityManager->flush();
 
@@ -79,10 +81,12 @@ class FormationController extends AbstractController
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
+            'title' => 'Formation'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="formation_show", methods={"GET"})
      */
     public function show(Formation $formation): Response{
@@ -90,6 +94,7 @@ class FormationController extends AbstractController
 
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,
+            'title' => 'Formation'
              
         ]);
     }
@@ -105,13 +110,9 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+            $this->addFlash('success', 'Vous avez bien modifié la formation');
 
-           
             $manager->flush();
-           
-           
-            
-
 
             return $this->redirectToRoute('formation_index', [
                 'id' => $formation->getId(),
@@ -121,6 +122,7 @@ class FormationController extends AbstractController
         return $this->render('formation/edit.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
+            'title' => 'Formation'
         ]);
     }
 
@@ -132,18 +134,50 @@ class FormationController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $this->addFlash('success', 'Vous avez bien suprimé la formation');
+
             $entityManager->remove($formation);
             $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('formation_index');
-        
+            return $this->redirectToRoute('formation_index');
+        }
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/addAtelier/{id}", name="duree_index")
+     */
+    public function addAtelierToFormation (Formation $formation, Request $request, ObjectManager $manager){
+           
+        $form = $this->createForm('App\Form\AteliersType', $formation);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->addFlash('success', "L'atelier à bien était ajouté a la formation");
+
+           
+            $manager->persist($formation);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('formation_index');
+        }
+
+        return $this->render('duree/index.html.twig', [
+            'formation' => $formation,
+            'form' => $form->createView(),
+            'title' => 'Formation'
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/pdf/{id}", name="formation_pdf", methods={"GET"})
      */
-    public function formationPdf(formation $formation)
+    public function formationPdf(Formation $formation)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -171,6 +205,7 @@ class FormationController extends AbstractController
             "Attachment" => false
         ]);
     }
+<<<<<<< HEAD
 
     
     /**
@@ -204,5 +239,7 @@ class FormationController extends AbstractController
         }
 
 
+=======
+>>>>>>> a85198ef2bbaad2744035a81e0910698e7264bb2
 }
 

@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Salle index{% endblock %}
+
 
 {% block body %}
- 
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <table class="table">
         <thead>
@@ -33,14 +38,13 @@
                 
                 
                 {% if is_granted('ROLE_ADMIN') %}
-                <td>
-                    <a href="{{ path('salle_edit', {'id': salle.id}) }}">Modifier</a>
-                </td>
-                <td>
-                    {{ include('salle/delete_form.html.twig') }}
-                </td>
-
-        {% endif %}
+                    <td>
+                        <a href="{{ path('salle_edit', {'id': salle.id}) }}">Modifier</a>
+                    </td>
+                    <td>
+                        {{ include('salle/delete_form.html.twig') }}
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

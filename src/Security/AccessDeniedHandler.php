@@ -11,8 +11,8 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
-        $content = header('Location: user/index.php'); 
+        $content = header('home'); 
 
-        return new Response($content, 403);
+        return new Response($content, 404);
     }
 }

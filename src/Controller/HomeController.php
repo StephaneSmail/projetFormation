@@ -21,8 +21,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class HomeController extends AbstractController
 {
     
- /**
-     * @Route("/", name="/")
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/", name="home")
      */
     public function index(Request $request, ObjectManager $manager): Response
     {
@@ -31,7 +32,8 @@ class HomeController extends AbstractController
         $form = $this -> createForm(ContactType::class, $contact);
 
         return $this->render('vitrine/index.html.twig', [
-            'form' => $form -> createView() 
+            'form' => $form -> createView(),
+            'title' => 'Accueil'
         ]);
     
     }

@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SessionController!{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     {% if is_granted('ROLE_ADMIN') %}
 
@@ -15,9 +20,9 @@
                 <th>Formation</th>
                 <th>Promotion</th>
                 <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Places max</th>
-                <th>Places restantes</th>
+                <th>Date de Fin</th>
+                <th>Nombre de place restante</th>
+                <th>Nombre de place dans la formation</th>
 
                 {% if is_granted('ROLE_ADMIN') %}
 
@@ -32,12 +37,12 @@
 
         {% for session in sessions %}
             <tr>
-                <td>{{ session.contenir.nomFormation }}</td>
+                <td><a href="{{ path('formation_show', {'id':session.contenir.id}) }}">{{ session.contenir.nomFormation }}</a></td>
                 <td><a href="{{ path('session_show', {'id':session.id}) }}">{{ session.Promotion }}</a></td>
                 <td>{{ session.dateDebut.format( 'd/m/Y') }}</td>
                 <td>{{ session.dateFin.format( 'd/m/Y') }}</td>
-                <td>{{ session.nbPlace }}</td>
                 <td>{{ session.nbPlace - session.stagiaires|length}}</td>
+                <td>{{ session.nbPlace }}</td>
 
                 
                 {% if is_granted('ROLE_ADMIN') %}

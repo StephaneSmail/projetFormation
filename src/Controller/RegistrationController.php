@@ -35,17 +35,14 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 ) 
-            );
-            //on active par défaut
-            // $user->setIsActive(true);
-            // $user->addRole("ROLE_USER");
-            // $user->addRole("ROLE_ADMIN");
+            );  
             // 4) save the User!
             $entityManager->persist($user);
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            $this->addFlash('success', 'Le compte à bien été enregistré.');
+            $this->addFlash('success', 'Le compte à bien été enregistré');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -87,7 +84,8 @@ class RegistrationController extends AbstractController
         }
     	
     	return $this->render('user/pass.html.twig', array(
-    		'form' => $form->createView(),
+            'form' => $form->createView(),
+            'title' => 'Modification password'
     	));
     }
 }

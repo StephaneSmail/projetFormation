@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Stagiaire{% endblock %}
 
 {% block body %}
     <h1>Stagiaire</h1>
@@ -54,15 +53,11 @@
             <tr>
                 <th>Sessions</th>
                 <td>
-                
             {% for session in stagiaire.sessions %}
-                {{ session }}
+                <a href="{{ path('session_show', {'id':session.id}) }}">{{ session.promotion }}</a>
             {% endfor %}
                 </td>
             </tr>
-
-            
-            
             
         </tbody>
     </table>

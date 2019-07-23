@@ -25,7 +25,6 @@ class Salle
      */
     private $nomSalle;
 
-    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
      */

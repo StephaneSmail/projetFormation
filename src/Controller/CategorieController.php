@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/categorie")
  */
 class CategorieController extends AbstractController
@@ -26,6 +27,7 @@ class CategorieController extends AbstractController
     {
         return $this->render('categorie/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
+            'title' => 'Catégorie'
         ]);
     }
 
@@ -54,15 +56,18 @@ class CategorieController extends AbstractController
         return $this->render('categorie/new_edit.html.twig', [
             'editMode' => $categorie-> getId() !== null,
             'form' => $form->createView(),
+            'title' => 'Catégorie'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="categorie_show", methods={"GET"})
      */
     public function show(Categorie $categorie): Response {
         return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie,
+            'title' => 'Catégorie'
              
         ]);
     }
