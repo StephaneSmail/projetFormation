@@ -21,12 +21,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AtelierController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="atelier_index")
      */
     public function index(AtelierRepository $atelierRepository): Response
     {
         return $this->render('atelier/index.html.twig', [
             'ateliers' => $atelierRepository->findAll(),
+            'title' => 'Atelier'
         ]);
     }
 
@@ -55,15 +57,18 @@ class AtelierController extends AbstractController
         return $this->render('atelier/new_edit.html.twig', [
             'editMode' => $atelier-> getId() !== null,
             'form' => $form->createView(),
+            'title' => 'Atelier'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="atelier_show", methods={"GET"})
      */
     public function show(Atelier $atelier): Response {
         return $this->render('atelier/show.html.twig', [
             'atelier' => $atelier,
+            'title' => 'Atelier'
              
         ]);
     }

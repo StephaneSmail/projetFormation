@@ -24,22 +24,26 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="user_index")
      */
     public function index(UserRepository $userRepository) :Response
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'title' => 'Utilisateur'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route ("/show/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response{
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'title' => 'Utilisateur'
         ]);
     }
 
@@ -70,12 +74,8 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
              
-            //on active par défaut
-            // $user->setIsActive(true);
-            // 4) save the User!
             $entityManager->flush();
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+
             $this->addFlash('success', 'Le compte a bien été modifié.');
 
             return $this->redirectToRoute('user_index');
@@ -83,7 +83,7 @@ class UserController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView(), 
-            'title' => 'Inscription'
+            'title' => 'Utilisateur'
         ]);
     }
 }

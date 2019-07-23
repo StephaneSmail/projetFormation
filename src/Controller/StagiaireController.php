@@ -24,12 +24,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StagiaireController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="stagiaire_index")
      */
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaireRepository->findAll(),
+            'title' => 'Stagiaire'
         ]);
     }
 
@@ -56,15 +58,18 @@ class StagiaireController extends AbstractController
         return $this->render('stagiaire/new.html.twig', [
             'stagiaire' => $stagiaire,
             'form' => $form->createView(),
+            'title' => 'Stagiaire'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="stagiaire_show", methods={"GET"})
      */
     public function show(Stagiaire $stagiaire): Response {
         return $this->render('stagiaire/show.html.twig', [
             'stagiaire' => $stagiaire,
+            'title' => 'Stagiaire'
              
         ]);
     }
@@ -92,6 +97,7 @@ class StagiaireController extends AbstractController
         return $this->render('stagiaire/edit.html.twig', [
             'stagiaire' => $stagiaire,
             'form' => $form->createView(),
+            'title' => 'Stagiaire'
         ]);
     }
 
@@ -114,6 +120,7 @@ class StagiaireController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/pdf/{id}", name="stagiaire_pdf", methods={"GET"})
      */
     public function pdf(Stagiaire $stagiaire)

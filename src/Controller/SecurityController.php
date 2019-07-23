@@ -33,7 +33,8 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'lastusername'  => $lastUsername,
-            'error'         => $error
+            'error'         => $error,
+            'title'         => 'Connexion'
             ]);
     }
 
@@ -84,7 +85,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     
-        return $this->render('security/forgotten_password.html.twig');
+        return $this->render('security/forgotten_password.html.twig', ['title' => 'Requete mot de passe']);
     }
 
     /**

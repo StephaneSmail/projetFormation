@@ -27,12 +27,14 @@ class FormationController extends AbstractController
 
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="formation_index")
      */
     public function index(FormationRepository $formationRepository): Response
     {
         return $this->render('formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
+            'title' => 'Formation'
         ]);
     }
 
@@ -70,17 +72,20 @@ class FormationController extends AbstractController
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
+            'title' => 'Formation'
         ]);
     }
 
     /**
-     * @Route("/{id}", name="formation_show")
+     * @IsGranted("ROLE_USER")
+     * @Route("/{id}", name="formation_show", methods={"GET"})
      */
     public function show(Formation $formation): Response{
 
 
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,
+            'title' => 'Formation'
              
         ]);
     }
@@ -108,6 +113,7 @@ class FormationController extends AbstractController
         return $this->render('formation/edit.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
+            'title' => 'Formation'
         ]);
     }
 
@@ -154,6 +160,7 @@ class FormationController extends AbstractController
         return $this->render('duree/index.html.twig', [
             'formation' => $formation,
             'form' => $form->createView(),
+            'title' => 'Formation'
         ]);
     }
 

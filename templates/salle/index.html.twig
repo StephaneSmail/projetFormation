@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Salle index{% endblock %}
+
 
 {% block body %}
 
@@ -38,14 +38,13 @@
                 
                 
                 {% if is_granted('ROLE_ADMIN') %}
-                <td>
-                    <a href="{{ path('salle_edit', {'id': salle.id}) }}">Modifier</a>
-                </td>
-                <td>
-                    {{ include('salle/delete_form.html.twig') }}
-                </td>
-
-        {% endif %}
+                    <td>
+                        <a href="{{ path('salle_edit', {'id': salle.id}) }}">Modifier</a>
+                    </td>
+                    <td>
+                        {{ include('salle/delete_form.html.twig') }}
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

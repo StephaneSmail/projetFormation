@@ -2,20 +2,27 @@
 <html>
   <head>
       <meta charset="UTF-8">
-      <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>
+          {% block title %}
+            {% if title is defined %}{{title}}{% else %}FoFormation{% endif %} 
+          {% endblock %}
+        </title>
+
       {% block stylesheets %}
-          {# bootstrap #}
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="https://www.sviesolutions.com/wp-content/uploads/2014/08/ico_formation.png" />
+        {# bootstrap #}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-          
-          <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+        
+        <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css" />
 
-          {# <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}"> #}
+        {# <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}"> #}
       {% endblock %}
+
   </head>
   <body>
     

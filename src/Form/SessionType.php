@@ -49,14 +49,12 @@ class SessionType extends AbstractType
             ->add('stagiaires', CollectionType::class, [
                     'entry_type' => EntityType::class,
                    
-                    'entry_options' => ['label' => "Choisir stagiaire :", "class" => Stagiaire::class,],
+                    'entry_options' => ['label' => "Choisir stagiaire :", "class" => Stagiaire::class],
                     'allow_add' => true,
                     'allow_delete' => true
                 ])
                 
                 ->add('submit', SubmitType::class, ['label'=>'Créer', 'attr'=>['class'=>'btn-primary btn-block']])
-            
-           
         ;
     }
 

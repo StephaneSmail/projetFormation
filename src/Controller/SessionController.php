@@ -23,12 +23,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="session_index")
      */
     public function index(SessionRepository $sessionRepository): Response
     {
         return $this->render('session/index.html.twig', [
             'sessions' => $sessionRepository->findAll(),
+            'title' => 'Session'
         ]);
     }
 
@@ -58,15 +60,18 @@ class SessionController extends AbstractController
         return $this->render('session/new.html.twig', [
             'session' => $session,
             'form' => $form->createView(),
+            'title' => 'Session'
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="session_show", methods={"GET"})
      */
     public function show(Session $session): Response {
         return $this->render('session/show.html.twig', [
             'session' => $session,
+            'title' => 'Session'
              
         ]);
     }
@@ -98,6 +103,7 @@ class SessionController extends AbstractController
         return $this->render('session/edit.html.twig', [
             'session' => $session,
             'form' => $form->createView(),
+            'title' => 'Session'
         ]);
     }
 

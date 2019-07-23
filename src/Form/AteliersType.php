@@ -23,9 +23,7 @@ class AteliersType extends AbstractType
                 'label' => false,
                 'entry_type'=> DureeType::class,
                 'entry_options'=>[
-
                     'label'=>"Atelier et Duree : "
-
                 ],
                 'allow_add'=> true,
                 'allow_delete'=> true,
