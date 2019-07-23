@@ -5,15 +5,16 @@ namespace App\Controller;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Duree;
+use App\Entity\Salle;
 use App\Entity\Atelier;
 use App\Entity\Formation;
 use App\Form\AteliersType;
-use App\Form\FormationType;
 
 
 
 
 // Include Dompdf required namespaces
+use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -43,13 +44,18 @@ class FormationController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="formation_new")
      */
-    public function new(Request $request,ObjectManager $manager): Response
+    public function new(Request $request,ObjectManager $manager, Salle $salle): Response
     {
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            
+
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
@@ -168,9 +174,9 @@ class FormationController extends AbstractController
 
     
     /**
-     * @Route("/addAtelier/{id}", name="add_atelier" )
+     * @Route("/addDuree/{id}", name="add_duree" )
      */
-    public function addAtelierToFormation (Atelier $atelier,Formation $formation, Request $request, ObjectManager $manager)
+    public function addAtelierToFormation (Formation $formation, Request $request, ObjectManager $manager)
         {
         
            
@@ -191,7 +197,7 @@ class FormationController extends AbstractController
                 return $this->redirectToRoute('formation_index');
             }
     
-            return $this->render('duree/index.html.twig', [
+            return $this->render('duree/addDuree.html.twig', [
                 'formation' => $formation,
                 'form' => $form->createView(),
             ]);

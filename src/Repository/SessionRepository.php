@@ -19,6 +19,19 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+    public function findIfTaken($debut, $fin, $id)
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.salle', 'sa')
+            ->where(':debut BETWEEN s.dateDebut and s.dateFin OR :fin BETWEEN s.dateDebut and s.dateFin')
+            ->andWhere('sa.id = :id')
+            ->setParameter('debut', $debut)
+            ->setParameter('fin', $fin)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Session[] Returns an array of Session objects
     //  */

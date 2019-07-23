@@ -41,7 +41,7 @@ class Session
     private $contenir;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Salle", inversedBy="meubler")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Salle", inversedBy="sessions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $salle;

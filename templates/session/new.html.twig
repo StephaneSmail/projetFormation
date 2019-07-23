@@ -15,6 +15,15 @@
         {% for stagiaire in form.stagiaires %}
             <li>{{ form_row(stagiaire) }}</li>
         {% endfor %}
+         {% for notice, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ notice }} alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endfor %}
+
+            </div>
     </ul>
       {{form_row(form.submit) }}
 {{ form_end(form) }}

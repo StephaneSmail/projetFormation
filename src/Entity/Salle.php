@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SalleRepository")
@@ -27,16 +29,17 @@ class Salle
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
      */
-    private $meubler;
+    private $sessions;
 
     /**
      * @ORM\Column(type="integer")
+      
      */
     private $nbplaces;
 
     public function __construct()
     {
-        $this->meubler = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,38 +59,6 @@ class Salle
         return $this;
     }
 
-
-    /**
-     * @return Collection|Session[]
-     */
-    public function getMeubler(): Collection
-    {
-        return $this->meubler;
-    }
-
-    public function addMeubler(Session $meubler): self
-    {
-        if (!$this->meubler->contains($meubler)) {
-            $this->meubler[] = $meubler;
-            $meubler->setSalle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMeubler(Session $meubler): self
-    {
-        if ($this->meubler->contains($meubler)) {
-            $this->meubler->removeElement($meubler);
-            // set the owning side to null (unless already changed)
-            if ($meubler->getSalle() === $this) {
-                $meubler->setSalle(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getNbplaces(): ?int
     {
         return $this->nbplaces;
@@ -99,4 +70,37 @@ class Salle
 
         return $this;
     }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+            $session->setSalle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->contains($session)) {
+            $this->sessions->removeElement($session);
+            // set the owning side to null (unless already changed)
+            if ($session->getSalle() === $this) {
+                $session->setSalle(null);
+            }
+        }
+
+        return $this;
+    }
+
+  
 }
