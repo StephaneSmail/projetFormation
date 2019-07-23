@@ -23,11 +23,23 @@ class Salle
      */
     private $nomSalle;
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 5006c232663d2c208b2a5f39deb6af68931672fb
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
      */
     private $meubler;
+<<<<<<< HEAD
+=======
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbplaces;
+>>>>>>> 5006c232663d2c208b2a5f39deb6af68931672fb
 
     public function __construct()
     {
@@ -79,6 +91,18 @@ class Salle
                 $meubler->setSalle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbplaces(): ?int
+    {
+        return $this->nbplaces;
+    }
+
+    public function setNbplaces(int $nbplaces): self
+    {
+        $this->nbplaces = $nbplaces;
 
         return $this;
     }
