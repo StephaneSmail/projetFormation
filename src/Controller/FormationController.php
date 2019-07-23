@@ -135,6 +135,7 @@ class FormationController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/pdf/{id}", name="formation_pdf", methods={"GET"})
      */
     public function formationPdf(formation $formation)
@@ -168,11 +169,10 @@ class FormationController extends AbstractController
 
     
     /**
-     * @Route("/addAtelier/{id}", name="add_atelier" )
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/addAtelier/{id}", name="add_atelier", methods={"GET"} )
      */
-    public function addAtelierToFormation (Atelier $atelier,Formation $formation, Request $request, ObjectManager $manager)
-        {
-        
+    public function addAtelierToFormation (Atelier $atelier,Formation $formation, Request $request, ObjectManager $manager){
            
             $form = $this->createForm('App\Form\AteliersType', $formation);
 
@@ -182,10 +182,7 @@ class FormationController extends AbstractController
     
                
                 $manager->persist($formation);
-               
-                
-           
-                
+ 
                 $manager->flush();
     
                 return $this->redirectToRoute('formation_index');

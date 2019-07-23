@@ -22,7 +22,7 @@ class HomeController extends AbstractController
 {
     
  /**
-     * @Route("/", name="/")
+     * @Route("/", name="home")
      */
     public function index(Request $request, ObjectManager $manager): Response
     {

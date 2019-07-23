@@ -93,9 +93,12 @@ class SessionController extends AbstractController
             $form->get('contenir')->getData();
             $form->get('stagiaires')->getData();
 
+            $this->addFlash('success', 'Vous avez bien modifié cet utilisateur');
+
             return $this->redirectToRoute('session_index', [
                 'id' => $session->getId(),
             ]);
+            
         }
 
         return $this->render('session/edit.html.twig', [

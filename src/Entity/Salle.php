@@ -23,15 +23,6 @@ class Salle
      */
     private $nomSalle;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $ordinateur;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $tabletteGraphique;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="salle", orphanRemoval=true)
@@ -60,29 +51,6 @@ class Salle
         return $this;
     }
 
-    public function getOrdinateur(): ?int
-    {
-        return $this->ordinateur;
-    }
-
-    public function setOrdinateur(int $ordinateur): self
-    {
-        $this->ordinateur = $ordinateur;
-
-        return $this;
-    }
-
-    public function getTabletteGraphique(): ?int
-    {
-        return $this->tabletteGraphique;
-    }
-
-    public function setTabletteGraphique(int $tabletteGraphique): self
-    {
-        $this->tabletteGraphique = $tabletteGraphique;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Session[]

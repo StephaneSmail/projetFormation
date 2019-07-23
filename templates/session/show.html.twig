@@ -37,8 +37,8 @@
                 <th>Stagiaires</th>
                 <td>
                 
-            {% for st in session.stagiaires %}
-                {{ st }}
+            {% for stagiaire in session.stagiaires %}
+                <a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
             {% endfor %}
                 </td>
             </tr>

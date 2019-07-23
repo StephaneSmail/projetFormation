@@ -30,6 +30,8 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $this->addFlash('notif', 'Bienvenue'.$lastUsername);
+
         return $this->render('security/login.html.twig', [
             'lastusername'  => $lastUsername,
             'error'         => $error
@@ -78,7 +80,7 @@ class SecurityController extends AbstractController
     
             $mailer->send($message);
     
-            $this->addFlash('notice', 'Mail envoyé');
+            $this->addFlash('success', 'Mail envoyé');
     
             return $this->redirectToRoute('app_login');
         }
@@ -106,7 +108,7 @@ class SecurityController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Mot de passe mis à jour');
+            $this->addFlash('success', 'Mot de passe mis à jour');
 
             return $this->redirectToRoute('app_login');
         }else {

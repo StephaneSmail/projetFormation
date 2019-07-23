@@ -54,15 +54,11 @@
             <tr>
                 <th>Sessions</th>
                 <td>
-                
             {% for session in stagiaire.sessions %}
-                {{ session }}
+                <a href="{{ path('session_show', {'id':session.id}) }}">{{ session.promotion }}</a>
             {% endfor %}
                 </td>
             </tr>
-
-            
-            
             
         </tbody>
     </table>

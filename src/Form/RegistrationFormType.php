@@ -67,9 +67,11 @@ class RegistrationFormType extends AbstractType
                 'attr' =>[
                     'class' => 'selectpicker',
                     'multiple data-live-search'=>"true",
+                    
                 ],
                 'multiple' => true,
                 'choice_label' => 'nomCategorie'
+                
                 
             ])
             ->add('plainPassword', RepeatedType::class, array(
