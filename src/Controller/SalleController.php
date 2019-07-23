@@ -36,6 +36,9 @@ class SalleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $this->addFlash('success', 'Vous avez bien crée une salle');
+
             $entityManager->persist($salle);
             $entityManager->flush();
 
@@ -69,6 +72,10 @@ class SalleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Vous avez bien modifié la salle');
+
+            $entityManager->flush();
+
             return $this->redirectToRoute('salle_index');
         }
 
@@ -85,6 +92,9 @@ class SalleController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$salle->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $this->addFlash('success', 'Vous avez bien supprimé la salle');
+
             $entityManager->remove($salle);
             $entityManager->flush();
         }

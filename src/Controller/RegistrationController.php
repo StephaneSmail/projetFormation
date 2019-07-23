@@ -45,7 +45,8 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            $this->addFlash('success', 'Le compte à bien été enregistré.');
+            $this->addFlash('success', 'Le compte à bien été enregistré');
+            
             return $this->redirectToRoute('user_index');
         }
 

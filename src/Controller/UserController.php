@@ -49,6 +49,9 @@ class UserController extends AbstractController
      */
      public function delete(User $user, ObjectManager $manager, Request $request): Response {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+
+            $this->addFlash('success', 'Le compte a bien été supprimé');
+            
             $manager->remove($user);
             $manager->flush();
         }
@@ -73,7 +76,8 @@ class UserController extends AbstractController
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            $this->addFlash('success', 'Votre compte à bien été modifié.');
+            $this->addFlash('success', 'Le compte a bien été modifié.');
+
             return $this->redirectToRoute('user_index');
         }
 

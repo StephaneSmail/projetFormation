@@ -42,17 +42,15 @@ class SessionController extends AbstractController
 
         $session = new Session();
         $form = $this->createForm(SessionType::class, $session);
-        $form->handleRequest($request);
-
-        
+        $form->handleRequest($request);   
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($session);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez bien crée une session');
 
             return $this->redirectToRoute('session_index');
         }
@@ -66,11 +64,7 @@ class SessionController extends AbstractController
     /**
      * @Route("/{id}", name="session_show", methods={"GET"})
      */
-    public function show(Session $session): Response
-
-    {
-
-
+    public function show(Session $session): Response {
         return $this->render('session/show.html.twig', [
             'session' => $session,
              
@@ -88,12 +82,12 @@ class SessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
-            $manager->flush();
             $form->get('contenir')->getData();
             $form->get('stagiaires')->getData();
+            
+            $manager->flush();
 
-            $this->addFlash('success', 'Vous avez bien modifié cet utilisateur');
+            $this->addFlash('success', 'Vous avez bien modifié cet session');
 
             return $this->redirectToRoute('session_index', [
                 'id' => $session->getId(),
@@ -115,8 +109,11 @@ class SessionController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->remove($session);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez bien supprimé cet session');
         }
 
         return $this->redirectToRoute('session_index');

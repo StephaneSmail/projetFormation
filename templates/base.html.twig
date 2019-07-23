@@ -106,7 +106,12 @@
         
         <script>
 
-          $('select').selectpicker();
+          
+
+          $(document).ready(function(){
+              $(".alert").fadeOut(2500);
+              $('select').selectpicker();
+          });
 
         </script>
         {% endblock %}

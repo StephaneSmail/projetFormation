@@ -34,9 +34,13 @@ class SessionType extends AbstractType
                
             )
 
-            ->add('dateDebut', DateType::class)
-        
-            ->add('dateFin', DateType::class)
+            ->add('dateDebut', DateType::class,[
+                'format' => 'dd MM yyyy',
+                
+            ])
+            ->add('dateFin', DateType::class,[
+                'format' => 'dd MM yyyy',
+            ])
             ->add('salle', EntityType::class, [
                 'class' => Salle::class,
                 'choice_label' => 'nomSalle'

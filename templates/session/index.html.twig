@@ -4,6 +4,12 @@
 
 {% block body %}
 
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% if is_granted('ROLE_ADMIN') %}
 
     <a href="{{ path('session_new') }}" class="btn btn-primary"> Ajouter une session </a>

@@ -3,7 +3,12 @@
 {% block title %}Salle index{% endblock %}
 
 {% block body %}
- 
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <table class="table">
         <thead>

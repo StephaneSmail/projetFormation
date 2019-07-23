@@ -3,6 +3,19 @@
 {% block title %}Hello FormationController!{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('notif') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <h1>Formations index</h1>
 
     <table class="table">

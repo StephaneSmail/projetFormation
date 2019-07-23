@@ -37,18 +37,18 @@ class StagiaireController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="stagiaire_new")
      */
-    public function new(Request $request,ObjectManager $manager): Response
-    {
+    public function new(Request $request,ObjectManager $manager): Response {
         $stagiaire = new Stagiaire();
         $form = $this->createForm(StagiaireType::class, $stagiaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($stagiaire);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez bien crée un stagiaire');
 
             return $this->redirectToRoute('stagiaire_index');
         }
@@ -62,11 +62,7 @@ class StagiaireController extends AbstractController
     /**
      * @Route("/{id}", name="stagiaire_show", methods={"GET"})
      */
-    public function show(Stagiaire $stagiaire): Response
-
-    {
-
-
+    public function show(Stagiaire $stagiaire): Response {
         return $this->render('stagiaire/show.html.twig', [
             'stagiaire' => $stagiaire,
              
@@ -75,7 +71,7 @@ class StagiaireController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/{id}/edit", name="stagiaire_edit")
+     * @Route("/edit/{id}", name="stagiaire_edit")
      */
     public function edit(Request $request, Stagiaire $stagiaire, ObjectManager $manager): Response
     {
@@ -85,6 +81,8 @@ class StagiaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $manager->flush();
+
+            $this->addFlash('success', 'Vous avez bien modifié ce stagiaire');
 
             return $this->redirectToRoute('stagiaire_index', [
                 'id' => $stagiaire->getId(),
@@ -107,6 +105,8 @@ class StagiaireController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($stagiaire);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez bien supprimé ce stagiaire');
         }
 
         return $this->redirectToRoute('stagiaire_index');

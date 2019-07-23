@@ -3,6 +3,12 @@
 {% block title %}Hello StagiaireController!{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Stagiaire index</h1>
 
     <table class="table table-hover">

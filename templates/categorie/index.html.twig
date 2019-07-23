@@ -5,6 +5,11 @@
 
 
 {% block body %}
+    {% for message in app.flashes('succes') %}
+        <div class="flash-notice alert laert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     {% if is_granted('ROLE_ADMIN') %}
 

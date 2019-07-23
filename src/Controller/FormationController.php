@@ -5,15 +5,12 @@ namespace App\Controller;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Duree;
-use App\Entity\Atelier;
-use App\Entity\Formation;
-use App\Form\AteliersType;
-use App\Form\FormationType;
-
-
 
 
 // Include Dompdf required namespaces
+use App\Entity\Atelier;
+use App\Entity\Formation;
+use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -54,16 +51,16 @@ class FormationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
 
-            $atelier = $form->get('atelier')->getData();
-            $nbJours = $form->get('nbJours')->getData();
-            $duree = new Duree();
-            $duree->setNbJour($nbJours)
-                    ->setFormations($formation)
-                    ->setAteliers($atelier);
+            // $atelier = $form->get('atelier')->getData();
+            // $nbJours = $form->get('nbJours')->getData();
+            // $duree = new Duree();
+            // $duree->setNbJour($nbJours)
+            //         ->setFormations($formation)
+            //         ->setAteliers($atelier);
 
-            $entityManager->persist($duree);
-            
-       
+            $this->addFlash('success', 'Vous avez bien rajouté une formation');
+
+            $entityManager->persist($formation);
             
             $entityManager->flush();
 
@@ -77,7 +74,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="formation_show", methods={"GET"})
+     * @Route("/{id}", name="formation_show")
      */
     public function show(Formation $formation): Response{
 
@@ -99,13 +96,9 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+            $this->addFlash('success', 'Vous avez bien modifié la formation');
 
-           
             $manager->flush();
-           
-           
-            
-
 
             return $this->redirectToRoute('formation_index', [
                 'id' => $formation->getId(),
@@ -126,19 +119,49 @@ class FormationController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $this->addFlash('success', 'Vous avez bien suprimé la formation');
+
             $entityManager->remove($formation);
             $entityManager->flush();
+
+            return $this->redirectToRoute('formation_index');
+        }
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/addAtelier/{id}", name="duree_index")
+     */
+    public function addAtelierToFormation (Formation $formation, Request $request, ObjectManager $manager){
+           
+        $form = $this->createForm('App\Form\AteliersType', $formation);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->addFlash('success', "L'atelier à bien était ajouté a la formation");
+
+           
+            $manager->persist($formation);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('formation_index');
         }
 
-        return $this->redirectToRoute('formation_index');
-        
+        return $this->render('duree/index.html.twig', [
+            'formation' => $formation,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/pdf/{id}", name="formation_pdf", methods={"GET"})
      */
-    public function formationPdf(formation $formation)
+    public function formationPdf(Formation $formation)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -166,34 +189,5 @@ class FormationController extends AbstractController
             "Attachment" => false
         ]);
     }
-
-    
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/addAtelier/{id}", name="add_atelier", methods={"GET"} )
-     */
-    public function addAtelierToFormation (Atelier $atelier,Formation $formation, Request $request, ObjectManager $manager){
-           
-            $form = $this->createForm('App\Form\AteliersType', $formation);
-
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-    
-               
-                $manager->persist($formation);
- 
-                $manager->flush();
-    
-                return $this->redirectToRoute('formation_index');
-            }
-    
-            return $this->render('duree/index.html.twig', [
-                'formation' => $formation,
-                'form' => $form->createView(),
-            ]);
-        }
-
-
 }
 
