@@ -4,15 +4,16 @@ namespace App\Controller;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
 use App\Repository\StagiaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 // Include Dompdf required namespaces
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -121,9 +122,9 @@ class StagiaireController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/pdf/{id}", name="stagiaire_pdf", methods={"GET"})
+     * @Route("/pdf/{id}/session/{id_session}", name="stagiaire_pdf", methods={"GET"})
      */
-    public function pdf(Stagiaire $stagiaire)
+    public function pdf(Stagiaire $stagiaire, Session $session)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -134,7 +135,8 @@ class StagiaireController extends AbstractController
         
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('stagiaire/mypdf.html.twig', [
-            'stagiaire' => $stagiaire
+            'stagiaire' => $stagiaire,
+            'session'   => $session
         ]);
         
         // Load HTML to Dompdf

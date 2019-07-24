@@ -1,18 +1,58 @@
-<h1>Certificat de reussite</h1>
+    <head>
+    <style>
+    #wrapper{
+        padding-top: 25%;
+    }
 
-    {% for session in stagiaire.sessions %}
-        {{session.promotion}}
-    {% endfor %}
+    h1{
+        font-size: 1.8em;
+    }
 
-    <table class="table">
+    h2{
+        padding:0 0 15px 0;
+        font-size: 2em;
+    }
+
+    h1 , h2, h3, p{
+        text-align:center;
+    }
+
+    </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <h2>Certificat de reussite</h2>
+
+            <p>Le présent document atteste que</p>
+            <h1>{{ stagiaire.nom ~" "~ stagiaire.prenom }}</h1>
+
+            <p> a terminé avec succès la formation 
+
+            {% for session in stagiaire.sessions %}
+                <h3> {{session.contenir.nomFormation}} <h3>
+            {% endfor %}
+            </p>
+
+            <p>
+            {% for session in stagiaire.sessions %}
+                <small>Fini le : {{session.dateFin.format('d F Y')}}</small>
+            {% endfor %}
+            </p>
+        </div>
+    <body>
+
+
+
+    {# <table class="table">
         <tbody>
             <tr>
                 <th>Nom</th>
-                <td>{{ stagiaire.nom }}</td>
+                <td></td>
             </tr>
             <tr>
                 <th>Prénom</th>
-                <td>{{ stagiaire.prenom }}</td>
+                <td>{{  }}</td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -40,4 +80,4 @@
             </tr>
             
         </tbody>
-    </table>
+    </table> #}
