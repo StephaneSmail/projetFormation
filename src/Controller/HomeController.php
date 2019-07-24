@@ -22,7 +22,6 @@ class HomeController extends AbstractController
 {
     
     /**
-     * @IsGranted("ROLE_USER")
      * @Route("/", name="home")
      */
     public function index(Request $request, ObjectManager $manager): Response

@@ -17,16 +17,16 @@
 
     <h1>Formations index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                
-                <th>Intitulé</th>
-
-                {% if is_granted('ROLE_ADMIN') %}
-
-                <th colspan = '2'>Actions</th>
-
+<section class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</section>
                 {% endif %}
             </tr>
         </thead>
@@ -42,7 +42,7 @@
                 
                 {% if is_granted('ROLE_ADMIN') %}
                 <td>
-                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">Modifier</a>
+                    <a href="{{ path('formation_edit', {'id': formation.id}) }}"><i class="fas fa-edit"></i></a>
                 </td>
                 <td>
                     {{ include('formation/delete_form.html.twig') }}
