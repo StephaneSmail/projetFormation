@@ -47,7 +47,7 @@
                 
                 {% if is_granted('ROLE_ADMIN') %}
 
-                <td><a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-warning"> Modifier</a></td>
+                <td><a href="{{ path('session_edit', {'id':session.id}) }}"class="btn btn-success"><i class="fas fa-edit"></i></td>
                 <td>{{ include('session/delete.html.twig') }}</td>
 
                 {% endif %}

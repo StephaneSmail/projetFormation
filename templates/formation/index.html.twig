@@ -2,7 +2,7 @@
 
 
 {% block body %}
-
+<img src= "https://universite.univ-paris-diderot.fr/sites/default/files/styles/image_100_pcent/public/trouver_une_formation_web.jpg?itok=DgqqlLUH" class="card-img-top" alt="...">
     {% for message in app.flashes('notif') %}
         <div class="flash-notice alert alert-success" role="alert">
             {{ message }}
@@ -19,13 +19,14 @@
 
     <table class="table">
         <thead>
-            <tr>
-                
+        <tr>
+
                 <th>Intitulé</th>
 
                 {% if is_granted('ROLE_ADMIN') %}
 
-                <th colspan = '2'>Actions</th>
+                <th colspan = '2'></th>  
+
 
                 {% endif %}
             </tr>
@@ -42,7 +43,7 @@
                 
                 {% if is_granted('ROLE_ADMIN') %}
                 <td>
-                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">Modifier</a>
+                    <a href="{{ path('formation_edit', {'id': formation.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i>
                 </td>
                 <td>
                     {{ include('formation/delete_form.html.twig') }}

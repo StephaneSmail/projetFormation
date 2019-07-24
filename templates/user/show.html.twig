@@ -2,54 +2,38 @@
 
 {% block body %}
 
-    <h1>Formateur</h1>
+    <h1>TEAM ELAN</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ user.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-            <tr>
-                <th>Code postal</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            <tr>
-                <th>Specialisation</th>
-                <td>
-            {% for categorie in user.enseigner %}
-                {{ categorie.nomCategorie ~"," }}
-            {% endfor %}
-                </td>
-            </tr>
-            
-        </tbody>
-    </table>
 
-    {% if app.user.email == user.email  %}
+    <div class="card" style="width: 18rem;">
+  <img src= {{ user.photo    }} class="card-img-top" alt="...">
+  <div class="card-body">
+    <h1 class="card-title">{{ user.nom }}</h1>
+    <h2 class="card-title">{{ user.prenom }}</h2>
+    <h4 class="card-title">Position(s):{% for role in user.roles %}
+                {{ role ~"  " }}
+            {% endfor %} </h4>
+
+    <p class="card-text"> Spécialité(s) :{% for categorie in user.enseigner %}
+                {{ categorie.nomCategorie ~"  " }}
+            {% endfor %}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Adresse: {{ user.adresse }}</li>
+    <li class="list-group-item">Telephone: {{ user.telephone }}</li>
+    <li class="list-group-item">E-mail: {{ user.email }}</li>
+    <li class="list-group-item">Adresse: {{ user.adresse }}</li>
+    <li class="list-group-item">Code postal: {{ user.cp }}</li>
+    <li class="list-group-item">Ville: {{ user.ville }}</li>
     
-        <a href="{{ path('user_pass', {'id':user.id} ) }}"> Modifier mon mot de passe</a>
+  </ul>
+ 
+
+ {% if app.user.email == user.email  %}
+    
+        <a class="btn btn-primary btn-lg" href="{{ path('user_pass', {'id':user.id} ) }}"> Modifier mon mot de passe</a>
     
     {% endif %}
+
 
 {% endblock %}
