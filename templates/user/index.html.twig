@@ -42,7 +42,7 @@
                         {{ role ~"," }}
                     {% endfor %}
                 </td>
-                    <td><a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-warning"> Modifier</a></td>
+                    <td><a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                     <td>{{ include('user/delete.html.twig') }}</td>
 
                 {# {% endif %} #}

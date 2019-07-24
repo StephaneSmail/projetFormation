@@ -2,36 +2,20 @@
 
 
 {% block body %}
-    <h1>Formation</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Formation</th>
-                <td>{{ formation.nomFormation }}</td>
-            </tr>
-
-            <tr>
-                <th>Descriptif</th>
-                <td>{{ formation.descriptif }}</td>
-            </tr>
-            <tr>
-                <th>Ateliers</th>
-                <td>
-                {% for atelier in formation.duree %}
+    
+    
+    <div class="jumbotron">
+  <h1 class="display-4">{{ formation.nomFormation }}</h1>
+  <p class="lead">{{ formation.descriptif }}</p>
+  <hr class="my-4">
+  <p>{% for atelier in formation.duree %}
                     {{ atelier }}
-                {% endfor %}
-                </td>
-                
-            </tr>
-        </tbody>
-    </table>
+                {% endfor %}</p>
+  
+  <a class="btn btn-warning btn-lg" href="{{ path('add_duree', {'id': formation.id}) }}" role="button">Modifier atelier </a>
+  <a class="btn btn-primary btn-lg" href="{{ path('formation_index') }}" role="button">Retour liste formations</a>
+</div>
 
-     <a href="{{ path('add_duree', {'id': formation.id}) }}">Ajouter atelier</a>
 
-     <a href="{{ path('add_duree', {'id': formation.id}) }}">Modifier atelier</a>
 
-     
-
-    <a href="{{ path('formation_index') }}">Retour liste formations</a>
 {% endblock %}
