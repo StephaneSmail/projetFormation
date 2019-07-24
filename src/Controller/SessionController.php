@@ -49,7 +49,6 @@ class SessionController extends AbstractController
         $form->handleRequest($request);   
 
         if ($form->isSubmitted() && $form->isValid()) {
-<<<<<<< HEAD
             $salle = $session->getSalle();
             if (($salle->getNbPlaces() - ($session->getNbplace())) < 0)
             {
@@ -70,9 +69,6 @@ $faim = $form->get('dateFin')->getData();
            
            
                 
-=======
-            
->>>>>>> a85198ef2bbaad2744035a81e0910698e7264bb2
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($session);
             $entityManager->flush();
@@ -112,7 +108,6 @@ $faim = $form->get('dateFin')->getData();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-<<<<<<< HEAD
             $salle = $session->getSalle();
             if (($salle->getNbPlaces() - ($session->getNbplace())) < 0)
             {
@@ -124,8 +119,6 @@ $faim = $form->get('dateFin')->getData();
 
             
             $manager->flush();
-=======
->>>>>>> a85198ef2bbaad2744035a81e0910698e7264bb2
             $form->get('contenir')->getData();
             $form->get('stagiaires')->getData();
             

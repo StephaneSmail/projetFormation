@@ -146,35 +146,6 @@ class FormationController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/addAtelier/{id}", name="duree_index")
-     */
-    public function addAtelierToFormation (Formation $formation, Request $request, ObjectManager $manager){
-           
-        $form = $this->createForm('App\Form\AteliersType', $formation);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->addFlash('success', "L'atelier à bien était ajouté a la formation");
-
-           
-            $manager->persist($formation);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('formation_index');
-        }
-
-        return $this->render('duree/index.html.twig', [
-            'formation' => $formation,
-            'form' => $form->createView(),
-            'title' => 'Formation'
-        ]);
-    }
-
-    /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/pdf/{id}", name="formation_pdf", methods={"GET"})
      */
     public function formationPdf(Formation $formation)
@@ -205,13 +176,12 @@ class FormationController extends AbstractController
             "Attachment" => false
         ]);
     }
-<<<<<<< HEAD
 
     
     /**
-     * @Route("/addDuree/{id}", name="add_duree" )
+     * @Route("/addDuree/{id}", name= "add_duree" )
      */
-    public function addAtelierToFormation (Formation $formation, Request $request, ObjectManager $manager)
+    public function addAtelierToFormation ( Formation $formation, Request $request, ObjectManager $manager)
         {
         
            
@@ -239,7 +209,5 @@ class FormationController extends AbstractController
         }
 
 
-=======
->>>>>>> a85198ef2bbaad2744035a81e0910698e7264bb2
 }
 

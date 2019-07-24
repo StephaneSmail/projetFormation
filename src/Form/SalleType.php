@@ -17,10 +17,6 @@ class SalleType extends AbstractType
         $builder
             ->add('nomSalle', TextType::class)
             ->add('nbplaces', IntegerType::class)
-<<<<<<< HEAD
-
-=======
->>>>>>> a85198ef2bbaad2744035a81e0910698e7264bb2
             ->add('submit', SubmitType::class, ['label'=>'Créer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
