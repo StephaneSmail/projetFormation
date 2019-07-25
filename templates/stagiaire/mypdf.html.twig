@@ -29,15 +29,14 @@
 
             <p> a terminé avec succès la formation 
 
-            {% for session in stagiaire.sessions %}
                 <h3> {{session.promotion}} <h3>
-            {% endfor %}
+           
             </p>
 
             <p>
-            {% for session in stagiaire.sessions %}
+            
                 <small>Fini le : {{session.dateFin.format('d F Y')}}</small>
-            {% endfor %}
+            
             </p>
         </div>
     <body>

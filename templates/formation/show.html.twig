@@ -8,10 +8,11 @@
   <h1 class="display-4">{{ formation.nomFormation }}</h1>
   <p class="lead">{{ formation.descriptif }}</p>
   <hr class="my-4">
-  <p>ATELIERS DE LA FORMATION: {% for atelier in formation.duree %}
-                    {{ atelier }}
-                {% endfor %}</p>
-  
+  <p>ATELIERS DE LA FORMATION: 
+    {% for atelier in formation.duree %}
+        {{ atelier }}
+    {% endfor %}</p>
+
   <a class="btn btn-warning btn-lg" href="{{ path('add_duree', {'id': formation.id}) }}" role="button">Modifier atelier </a>
   <a class="btn btn-primary btn-lg" href="{{ path('formation_index') }}" role="button">Retour liste formations</a>
 </div>
