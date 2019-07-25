@@ -35,11 +35,11 @@
 
         {% for user in users %}
 
-            {# {% if 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles  %} #}
+            {% if 'ROLE_SUPER_ADMIN' in user.roles %}
                 <tr>
                 <td><a href="{{ path('user_show', {'id':user.id}) }}">{{ user.nom ~" "~ user.prenom }}</a></td>
                 <td>{{ user.dateEntree.format( 'd/m/Y') }}</td>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <td>            
                     {% for role in user.roles %}
                         {{ role ~"," }}
@@ -48,9 +48,14 @@
                     <td><a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a></td>
                     <td>{{ include('user/delete.html.twig') }}</td>
 
-                {# {% endif %} #}
+                {% endif %}
             </tr>
             {% endif %}
+
+        {% else %}
+        <tr>
+            <td colspan="6">Pas de résultat</td>
+        </tr>
                      
         {% endfor %}
 

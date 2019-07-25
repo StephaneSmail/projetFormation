@@ -35,8 +35,8 @@ class Session
     private $dateFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Formation")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Formation", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $contenir;
 
