@@ -124,7 +124,7 @@ class StagiaireController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/pdf/{id}/session/{id_session}", name="stagiaire_pdf", methods={"GET"})
      */
-    public function pdf(Stagiaire $stagiaire, Session $session)
+    public function pdf(Stagiaire $stagiaire)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -136,7 +136,7 @@ class StagiaireController extends AbstractController
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('stagiaire/mypdf.html.twig', [
             'stagiaire' => $stagiaire,
-            'session'   => $session
+
         ]);
         
         // Load HTML to Dompdf

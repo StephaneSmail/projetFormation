@@ -46,18 +46,13 @@ class FormationController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="formation_new")
      */
-    public function new(Request $request,ObjectManager $manager, Salle $salle): Response
+    public function new(Request $request,ObjectManager $manager): Response
     {
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-            
-
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($formation);
@@ -179,35 +174,29 @@ class FormationController extends AbstractController
 
     
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/addDuree/{id}", name= "add_duree" )
      */
-    public function addAtelierToFormation ( Formation $formation, Request $request, ObjectManager $manager)
-        {
-        
+    public function addAtelierToFormation ( Formation $formation, Request $request, ObjectManager $manager): Response{
            
-            $form = $this->createForm('App\Form\AteliersType', $formation);
+        $form = $this->createForm('App\Form\AteliersType', $formation);
 
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-    
-               
-                $manager->persist($formation);
-               
-                
-           
-                
-                $manager->flush();
-    
-                return $this->redirectToRoute('formation_index');
-            }
-    
-            return $this->render('duree/addDuree.html.twig', [
-                'formation' => $formation,
-                'form' => $form->createView(),
-            ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            
+            $manager->persist($formation);            
+            
+            $manager->flush();
+
+            return $this->redirectToRoute('formation_index');
         }
 
-
+        return $this->render('duree/addDuree.html.twig', [
+            'formation' => $formation,
+            'form' => $form->createView(),
+        ]);
+    }
 }
 
