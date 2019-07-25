@@ -7,13 +7,15 @@
 
     <div class="jumbotron">
   <h1 class="display-4">{{ salle.nomSalle }}</h1>
-  <p class="lead">{{ salle.nbplaces }}</p>
+  <p class="lead">{{ salle.nbplaces }} places disponibles</p>
   <hr class="my-4">
-  <p>Materiels dans la salle: {% for materiel in salle.posseder %}
-                    {{ materiel }}
-                {% endfor %}</p>
+  <p>Materiels dans la salle: <ul>{% for materiel in salle.posseders %}
   
-  <a class="btn btn-warning btn-lg" href="{{ path('add_posseder', {'id': salle.id}) }}" role="button">Modifier matériels </a>
+
+                    <li>{{ materiel.quantite ~ "  " ~ materiel.materiels.intitule }}</li>
+                {% endfor %}</ul></p>
+  
+  <a class="btn btn-warning btn-lg" href="{{ path('add_materiel', {'id': salle.id}) }}" role="button">Modifier matériels </a>
   <a class="btn btn-primary btn-lg" href="{{ path('salle_index') }}" role="button">Retour liste des salles</a>
 </div>
 

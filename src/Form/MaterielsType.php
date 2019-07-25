@@ -2,11 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Posseder;
-use App\Entity\Materiel;
+use App\Entity\Salle;
 use App\Form\DureeType;
+use App\Entity\Posseder;
 use App\Entity\Categorie;
 use App\Entity\Formation;
+use App\Form\PossederType;
+use App\Form\MaterielsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,7 +21,7 @@ class MaterielsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
-            ->add('posseder', CollectionType::class, [
+            ->add('posseders', CollectionType::class, [
                 'label' => false,
                 'entry_type'=> PossederType::class,
                 'entry_options'=>[
@@ -37,7 +39,7 @@ class MaterielsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Formation::class,
+            'data_class' => Salle::class,
         ]);
     }
 }

@@ -11,7 +11,7 @@
         {{form_row(form.salle) }}
    
 
-
+    <input type="hidden" id="maxNb" value="{{ session.nbPlace }}">
     <ul id="collections" data-prototype= "{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
         {% for stagiaire in form.stagiaires %}
             <li class="collection">{{ form_row(stagiaire) }}</li>

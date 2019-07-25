@@ -44,7 +44,7 @@
             <tr>
                 
                 <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nomSalle }}</a></td>
-                <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nbPlace }}</a></td>
+                <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nbPlaces }}</a></td>
                 
                 
                 
@@ -64,4 +64,7 @@
             </tr>
         {% endfor %}
         </tbody>
+
     </table>
+
+    {% endblock %}

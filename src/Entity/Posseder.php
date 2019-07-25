@@ -74,7 +74,7 @@ class Posseder
 
     public function __ToString(){
         return 
-        $this->getMateriels().': '.$this->getQuantite(). ' jour(s),';
+        $this->getQuantite();
         
     }
 }

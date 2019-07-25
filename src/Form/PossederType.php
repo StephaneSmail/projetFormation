@@ -2,8 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Posseder;
 use App\Entity\Atelier;
+use App\Entity\Materiel;
+use App\Entity\Posseder;
 use App\Entity\Categorie;
 use App\Entity\Formation;
 use Doctrine\ORM\EntityRepository;
@@ -24,9 +25,10 @@ class PossederType extends AbstractType
         ->add('materiels', EntityType::class,[
             'class' => Materiel::class,
             'label' =>false,
+            'choice_label' =>'intitule',
             'query_builder' => function (EntityRepository $er){
                 return $er->createQueryBuilder('m')
-                ->orderBy('m.Intitule','ASC');
+                ->orderBy('m.intitule', 'ASC');
             },
 
             
@@ -41,7 +43,7 @@ class PossederType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Duree::class,
+            'data_class' => Posseder::class,
         ]);
     }
 }

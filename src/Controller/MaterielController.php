@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Materiel;
 use App\Form\MaterielType;
 use App\Repository\MaterielRepository;
+use App\Repository\PossederRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,8 +23,26 @@ class MaterielController extends AbstractController
      */
     public function index(MaterielRepository $materielRepository): Response
     {
+        
         return $this->render('materiel/index.html.twig', [
             'materiels' => $materielRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/posseder/{id}", name="materiel_nbused", methods={"GET"})
+     */
+    public function getUsed(Materiel $m, PossederRepository $pr): Response
+    {
+        $materiels = $pr->getUsed($m->getId());
+        $sum = $m->getStock();
+        foreach($materiels as $i)
+        {
+            $sum -= $i->getQuantite();
+        }
+        return $this->render('materiel/nbsum.html.twig', [
+            'sum' => $sum,
         ]);
     }
 

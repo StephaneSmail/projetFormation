@@ -8,8 +8,8 @@
 
         <input type="hidden" id"maxNb" value=30>
 
-        <ul id="gestionMateriels" data-prototype= "{{ form_row(form.posseder.vars.prototype)|e('html_attr') }}">
-        {% for atelier in form.duree %}
+        <ul id="gestionMateriels" data-prototype= "{{ form_row(form.posseders.vars.prototype)|e('html_attr') }}">
+        {% for materiel in form.posseders %}
             <li>{{ form_row(materiel) }}</li>
         {% endfor %}
     </ul>

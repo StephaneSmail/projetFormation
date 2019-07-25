@@ -10,6 +10,7 @@
             <tr>
                 <th>Intitule</th>
                 <th>Stock</th>
+                <th>Stock déjà utilisé</th>
                 <th>Descriptif</th>
                 <th>actions</th>
             </tr>
@@ -20,6 +21,7 @@
                
                 <td>{{ materiel.intitule }}</td>
                 <td>{{ materiel.stock }}</td>
+                <td>{{ render(controller('App\\Controller\\MaterielController::getUsed', {'id': materiel.id})) }}</td>
                 <td>{{ materiel.descriptif }}</td>
                 <td>
                     <a href="{{ path('materiel_show', {'id': materiel.id}) }}">show</a>

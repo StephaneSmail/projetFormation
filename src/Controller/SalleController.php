@@ -76,7 +76,7 @@ class SalleController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/edit/{id}", name="salle_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Salle $salle): Response
+    public function edit(Request $request, Salle $salle,ObjectManager $manager): Response
     {
         $form = $this->createForm(SalleType::class, $salle);
         $form->handleRequest($request);
@@ -86,7 +86,7 @@ class SalleController extends AbstractController
 
             $this->addFlash('success', 'Vous avez bien modifié le stock de matériel');
 
-            $entityManager->flush();
+            $manager->flush();
 
             return $this->redirectToRoute('salle_index');
         }

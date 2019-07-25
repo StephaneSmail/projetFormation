@@ -37,7 +37,7 @@ class Salle
     private $nbplaces;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="salles")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="salles" , cascade={"persist"})
      */
     private $posseders;
 
@@ -136,6 +136,12 @@ class Salle
         }
 
         return $this;
+    }
+
+    public function __ToString(){
+        return 
+        $this->getNbplaces(). ' place(s),';
+        
     }
 
   

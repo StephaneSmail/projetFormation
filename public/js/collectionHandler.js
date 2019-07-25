@@ -4,11 +4,12 @@
     //le premier élément li de la liste (celui qui contient le bouton 'ajouter')
     var $newLinkLi = $('<li></li>').append($addCollectionButton);
     
-    function generateDeleteButton(){
+    function generateDeleteButton($collection){               //ici ($collection)
         var $btn = $delCollectionButton.clone();
+        var index = $collection.data('index')                 //  ici
         $btn.on("click", function(){//événement clic du bouton supprimer
             $(this).parent("li").remove();
-            $collection.data('index', $collection.data('index')-1)
+            $collection.data('index', index-1)
         })
         return $btn;
     }
@@ -25,27 +26,33 @@
         $collection.data('index', index+1);
 
         //on construit l'élément li avec le champ et le bouton supprimer
-        var $newFormLi = $('<li></li>').append(newForm).append(generateDeleteButton());
+        var $newFormLi = $('<li></li>').append(newForm).append(generateDeleteButton($collection));   //ici ($collection)
         //on ajoute la nouvelle li au dessus de celle qui contient le bouton "ajouter"
         $newLinkLi.before($newFormLi);
     }
     //rendu de la collection au chargement de la page
     $(document).ready(function() {
         //on pointe la liste complete (le conteneur de la collection)
-        var $collection = $("ul#collections")
+        var $collection = $("ul#collections") 
+        var $collectionLi = $("ul#collections li")        // ici 
         //on y ajoute le bouton ajouter (à la fin du contenu)
         $collection.append($newLinkLi);
-
+        $collection.data('index', $collectionLi.length);      // ici 
         //pour chaque li déjà présente dans la collection (dans le cas d'une modification)
-        $(".collection").each(function(){
+        $($collectionLi).each(function(){
             //on génère et ajoute un bouton "supprimer"
-            $(this).append(generateDeleteButton());
+            $(this).append(generateDeleteButton($collection));     //ici ($collection)
         })
         //le data index de la collection est égal au nombre de input à l'intérieur
-        $collection.data('index', $collection.find(':input').length);
-        $addCollectionButton.on('click', function(e) { // au clic sur le bouton ajouter
+
+
+        // $collection.data('index', $collection.find(':input').length);
+        $addCollectionButton.on('click', function() { // au clic sur le bouton ajouter
             //si la collection n'a pas encore autant d'élément que le maximum autorisé
-            if($collection.data('index') <= $("input[maxNb]").val()){
+
+
+
+            if($collection.data('index') < $("#maxNb").val()){
                 //on appelle la fonction qui ajoute un nouveau champ
                 addCollectionForm($collection, $newLinkLi);
             }
