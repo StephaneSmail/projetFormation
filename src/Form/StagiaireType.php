@@ -21,7 +21,12 @@ class StagiaireType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
-            ->add('dateNaissance', DateType::class)
+            ->add('dateNaissance', DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')-100),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),
+            ))
             ->add('adresse', TextType::class)
             ->add('ville', TextType::class)
             ->add('cp', TextType::class, array(

@@ -3,38 +3,71 @@
 {% block title %}Materiel index{% endblock %}
 
 {% block body %}
-    <h1>Materiel index</h1>
+    
+<img src= "http://www.lacroixhebdo.fr/9BC36/informatique-3.jpg  " class="card-img-top" alt="..." style="width:50em; height:40em ;" >
+   
+    {% for message in app.flashes('notif') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
-    <table class="table">
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+     {% if is_granted('ROLE_ADMIN') %}
+
+    <a href="{{ path('materiel_new') }}" class="btn btn-primary">Créer un nouveau matériel</a>
+
+    {% endif %}
+
+
+    <table class="table table-striped">
         <thead>
-            <tr>
+        <tr>
+
                 <th>Intitule</th>
                 <th>Stock</th>
                 <th>Stock déjà utilisé</th>
                 <th>Descriptif</th>
-                <th>actions</th>
+               
+
+                {% if is_granted('ROLE_ADMIN') %}
+                <th colspan='2'>Modifier</th>
+
+
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for materiel in materiels %}
             <tr>
-               
-                <td>{{ materiel.intitule }}</td>
+                
+                <td><a href="{{ path('materiel_show', {'id': materiel.id}) }}">{{ materiel.intitule }}</a></td>
                 <td>{{ materiel.stock }}</td>
                 <td>{{ render(controller('App\\Controller\\MaterielController::getUsed', {'id': materiel.id})) }}</td>
                 <td>{{ materiel.descriptif }}</td>
+                
+                
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
-                    <a href="{{ path('materiel_show', {'id': materiel.id}) }}">show</a>
-                    <a href="{{ path('materiel_edit', {'id': materiel.id}) }}">edit</a>
+                    <a href="{{ path('materiel_edit', {'id': materiel.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i>
                 </td>
+                <td>
+                    {{ include('materiel/delete_form.html.twig') }}
+                </td>
+                
+                {% endif %}
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">Pas de résultat</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('materiel_new') }}">Create new</a>
 {% endblock %}

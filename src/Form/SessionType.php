@@ -34,13 +34,18 @@ class SessionType extends AbstractType
                
             )
 
-            ->add('dateDebut', DateType::class,[
-                'format' => 'dd MM yyyy',
-                
-            ])
-            ->add('dateFin', DateType::class,[
-                'format' => 'dd MM yyyy',
-            ])
+            ->add('dateDebut', DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('1990 '), date('Y') + 10),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),
+            ))
+            ->add('dateFin', DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('1990 '), date('Y') + 10),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),
+            ))
             ->add('salle', EntityType::class, [
                 'class' => Salle::class,
                 'choice_label' => 'nomSalle'

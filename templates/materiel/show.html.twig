@@ -3,29 +3,19 @@
 {% block title %}Materiel{% endblock %}
 
 {% block body %}
-    <h1>Materiel</h1>
+        
+    
+    <div class="jumbotron">
+  <h1 class="display-4">{{ materiel.intitule }}</h1>
+  <p class="lead">{{ materiel.descriptif }}</p>
+  <hr class="my-4">
+  <h3>quantité totale: {{ materiel.stock }} </h3>
+  <h3>quantité utlisée: {{ render(controller('App\\Controller\\MaterielController::getUsed', {'id': materiel.id})) }} </h3>
+    
+  <a class="btn btn-primary btn-lg" href="{{ path('materiel_index') }}" role="button">Liste des matériels</a>
+</div>
 
-    <table class="table">
-        <tbody>
-            
-            <tr>
-                <th>Intitule</th>
-                <td>{{ materiel.intitule }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ materiel.stock }}</td>
-            </tr>
-            <tr>
-                <th>Descriptif</th>
-                <td>{{ materiel.descriptif }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('materiel_index') }}">back to list</a>
-
-    <a href="{{ path('materiel_edit', {'id': materiel.id}) }}">edit</a>
+    
 
     {{ include('materiel/delete_form.html.twig') }}
 {% endblock %}
