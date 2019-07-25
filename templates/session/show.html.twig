@@ -35,12 +35,22 @@
             </tr>
             <tr>
                 <th>Stagiaires</th>
-                <td>
+                
                 
             {% for stagiaire in session.stagiaires %}
+            <td>
                 <a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-            {% endfor %}
+            </td>
+            {% if session.dateFin|date() %}
+             
+                <td>
+                    <a href="{{ path('stagiaire_pdf', {'id': stagiaire.id,'id_session': session.id}) }}">PDF</a>
                 </td>
+
+            {% endif %}
+            
+            {% endfor %}
+                
             </tr>
             
             

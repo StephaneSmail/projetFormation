@@ -34,7 +34,7 @@
                 <td><a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire.nom ~" "~ stagiaire.prenom }}</a></td>
                 <td>{{ stagiaire.dateNaissance ? stagiaire.dateNaissance|date('d-m-Y') : '' }}</td>
                 <td>
-                   <a href="{{ path('stagiaire_pdf', {'id': stagiaire.id}) }}">PDF</a>
+                   
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('stagiaire_edit', {'id': stagiaire.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                     </td>
