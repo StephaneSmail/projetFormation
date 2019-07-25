@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for notice, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ notice }} alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
    {{ form_start(form) }}
 
         {{form_row(form.contenir) }}
@@ -15,13 +22,7 @@
         {% for stagiaire in form.stagiaires %}
             <li>{{ form_row(stagiaire) }}</li>
         {% endfor %}
-         {% for notice, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ notice }} alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% endfor %}
+        
 
             </div>
     </ul>
