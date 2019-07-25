@@ -58,8 +58,8 @@ class SessionController extends AbstractController
                 return $this->redirectToRoute('session_new');
             }
 
-$deb = $form->get('dateDebut')->getData();
-$faim = $form->get('dateFin')->getData();
+            $deb = $form->get('dateDebut')->getData();
+            $faim = $form->get('dateFin')->getData();
             $taken = $this->getDoctrine()->getRepository(Session::class)->findIfTaken($deb, $faim, $salle->getId());
 
             if ($taken) {

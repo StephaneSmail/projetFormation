@@ -54,7 +54,7 @@ class SessionType extends AbstractType
                     'allow_delete' => true
                 ])
                 
-                ->add('submit', SubmitType::class, ['label'=>'Créer', 'attr'=>['class'=>'btn-primary btn-block']])
+                ->add('submit', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 

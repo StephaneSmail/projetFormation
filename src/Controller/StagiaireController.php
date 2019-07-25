@@ -122,10 +122,12 @@ class StagiaireController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/pdf/{id}/session/{id_session}", name="stagiaire_pdf", methods={"GET"})
+     * @Route("/pdf/{id}/session", name="stagiaire_pdf", methods={"GET"})
      */
-    public function pdf(Stagiaire $stagiaire)
+    public function pdf(Session $session, Request $request, ObjectManager $em)
     {
+        $idstag = $request->query->get('id_stag');
+        $stagiaire = $em->getRepository(Stagiaire::class)->findOneBy(['id' => $idstag]);
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -136,7 +138,7 @@ class StagiaireController extends AbstractController
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('stagiaire/mypdf.html.twig', [
             'stagiaire' => $stagiaire,
-
+            'session' => $session
         ]);
         
         // Load HTML to Dompdf

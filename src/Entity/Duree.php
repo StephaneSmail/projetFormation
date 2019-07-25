@@ -25,8 +25,6 @@ class Duree
      */
     private $nbJour;
 
-
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Formation", inversedBy="duree", cascade={"persist"})
      */
