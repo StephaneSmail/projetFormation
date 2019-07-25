@@ -23,7 +23,7 @@ security:
                 check_path: app_login
             logout:
                 path:   /logout
-                target: /login
+                target: /
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
