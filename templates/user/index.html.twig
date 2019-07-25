@@ -2,6 +2,9 @@
 
 
 {% block body %}
+
+<img src= "https://www.evoleo.fr/wp-content/uploads/2018/04/efficacite-professionnelle-evoleo-paris-haussmann-4.jpg" class="card-img-top" alt="..." style="width:58em; height:40em;" >
+
     {% for message in app.flashes('success') %}
         <div class="flash-notice alert alert-success" role="alert">
             {{ message }}
@@ -17,12 +20,12 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Formateur</th>
+                <th>Nom/Prénom</th>
                 <th>Date d'entrée</th>
                 {% if is_granted('ROLE_ADMIN') %}
-                <th>Niveau</th>
+                <th>Poste occupé</th>
                 <th>Modifier</th>
-                <th>Supprimer</th>
+               
                 {% endif %}
                 
             </tr>
@@ -35,7 +38,7 @@
             {# {% if 'ROLE_ADMIN' not in user.roles and 'ROLE_SUPER_ADMIN' not in user.roles  %} #}
                 <tr>
                 <td><a href="{{ path('user_show', {'id':user.id}) }}">{{ user.nom ~" "~ user.prenom }}</a></td>
-                <td>{{ user.dateEntree.format( 'd/m/y') }}</td>
+                <td>{{ user.dateEntree.format( 'd/m/Y') }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
                 <td>            
                     {% for role in user.roles %}

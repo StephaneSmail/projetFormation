@@ -8,7 +8,7 @@
   <h1 class="display-4">{{ formation.nomFormation }}</h1>
   <p class="lead">{{ formation.descriptif }}</p>
   <hr class="my-4">
-  <p>{% for atelier in formation.duree %}
+  <p>ATELIERS DE LA FORMATION: {% for atelier in formation.duree %}
                     {{ atelier }}
                 {% endfor %}</p>
   

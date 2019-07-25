@@ -4,13 +4,20 @@
 
 {% block body %}
 
-<img src= "https://wildcodeschool.fr/wp-content/uploads/2017/01/wild-code-school-la-loupe-open-space-working.jpg" class="card-img-top" alt="...">
+<img src= "https://i0.wp.com/www.tom.travel/wp-content/uploads/2019/04/La-SNCF-offre-une-formation-de-developpeur-web-avec-embauche-a-la-cle.jpg?ssl=1" class="card-img-top" alt="..." style="width:50em; height:40em;">
 
     {% for message in app.flashes('success') %}
         <div class="flash-notice alert alert-success" role="alert">
             {{ message }}
         </div>
     {% endfor %}
+
+
+    {% if is_granted('ROLE_ADMIN') %}
+
+    <a href="{{ path('salle_new') }}" class="btn btn-primary">Créer une nouvelle salle</a>
+
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -56,5 +63,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('salle_new') }}">Create new</a>
+  
 {% endblock %}

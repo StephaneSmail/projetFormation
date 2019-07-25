@@ -32,19 +32,27 @@
 
     
     {% if app.user %}
+
+  
         <div class="checkbox mb-3"><h2>Vous êtes déjà connecté</h2>  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         {% else %}
+
+         <img src= "https://toowood.fr/303-large_default/tete-d-elan-murale-bois.jpg" alt="..." style="width:auto; height:40em; justy">
+        
+         <img src= "https://www.fashioncentral.pk/wp-content/uploads/2017/02/Designers/Logo.jpg" alt="..." style="width:auto; height:30em; ">
+        
+        
         <div class="jumbotron">
-            <h1 class="display-3">LOGIN TEAM</h1>
-            <p class="lead">Bienvenue, si tu es membre de l'équipe d'administration, login pour avoir accès au tableau d'admin</p>
+            <h1 class="display-3">CONNECTEZ-VOUS</h1>
+            <p class="lead">Bienvenue! Si vous êtes membre de la TEAM ELAN, login pour avoir accès au tableau d'administration</p>
             <hr class="my-4">
-            <p>Ton compte doit avoir été validé par l'administrateur du site</p>
+            <p>Votre compte doit avoir été validé par l'administrateur du site</p>
             <div class="form-group">
                 <label for="inputEmail">Email</label>
                 <input type="email" value="{{ lastusername }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
             </div>
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
             
 
             <input type="hidden" name="_csrf_token"
@@ -56,7 +64,7 @@
         </button>
         
         <div>
-            <a  href="{{ path('forgotten_password') }}">Forgotten password</a>
+            <a  href="{{ path('forgotten_password') }}">Mot de passe oublié</a>
         </div>
 
         
