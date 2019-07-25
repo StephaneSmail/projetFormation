@@ -6,28 +6,36 @@
 
 
     <div class="card" style="width: 25rem; ">
-  <img src= {{ user.photo    }} class="card-img-top" alt="...">
-  <div class="card-body">
-    <h1 class="card-title">{{ user.nom }}</h1>
-    <h2 class="card-title">{{ user.prenom }}</h2>
-    <h4 class="card-title">Position(s):{% for role in user.roles %}
-                {{ role ~"  " }}
-            {% endfor %} </h4>
+      <img src= {{ user.photo    }} class="card-img-top" alt="...">
+      <div class="card-body">
+        <h1 class="card-title">{{ user.nom }}</h1>
+        <h2 class="card-title">{{ user.prenom }}</h2>
+        <h4 class="card-title">Position(s):
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        
+          {% for role in user.roles %}
+            {{ role ~"  " }}
+          {% endfor %} </h4>
+          
+        {% endif %}
 
-    <p class="card-text"> Spécialité(s) :{% for categorie in user.enseigner %}
-                {{ categorie.nomCategorie ~"  " }}
-            {% endfor %}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Adresse: {{ user.adresse }}</li>
-    <li class="list-group-item">Telephone: {{ user.telephone }}</li>
-    <li class="list-group-item">E-mail: {{ user.email }}</li>
-    <li class="list-group-item">Adresse: {{ user.adresse }}</li>
-    <li class="list-group-item">Code postal: {{ user.cp }}</li>
-    <li class="list-group-item">Ville: {{ user.ville }}</li>
+        <p class="card-text"> Spécialité(s) :
+
+        {% for categorie in user.enseigner %}
+          {{ categorie.nomCategorie ~"  " }}
+        {% endfor %}</p>
+    </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Adresse: {{ user.adresse }}</li>
+        <li class="list-group-item">Telephone: {{ user.telephone }}</li>
+        <li class="list-group-item">E-mail: {{ user.email }}</li>
+        <li class="list-group-item">Adresse: {{ user.adresse }}</li>
+        <li class="list-group-item">Code postal: {{ user.cp }}</li>
+        <li class="list-group-item">Ville: {{ user.ville }}</li>
+        
+      </ul>
     
-  </ul>
- 
 
  {% if app.user.email == user.email  %}
     

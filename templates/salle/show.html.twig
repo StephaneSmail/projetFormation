@@ -18,11 +18,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('salle_index') }}">back to list</a>
+    <a href="{{ path('salle_index') }}">Liste des salles</a>
 
-    <a href="{{ path('salle_edit', {'id': salle.id}) }}">edit</a>
+    <a href="{{ path('salle_edit', {'id': salle.id}) }}">Edit</a>
 
     {{ include('salle/delete_form.html.twig') }}
 
-    <a href="{{ path('salle_index') }}">Liste des salles</a>
+    
 {% endblock %}

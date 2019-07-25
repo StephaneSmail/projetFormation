@@ -30,7 +30,7 @@ class Atelier
     private $programmer;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Duree", mappedBy="ateliers", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Duree",cascade={"persist"}, mappedBy="ateliers", orphanRemoval=true)
      */
     private $duree;
 
