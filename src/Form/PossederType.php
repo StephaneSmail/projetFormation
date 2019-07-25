@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Duree;
+use App\Entity\Posseder;
 use App\Entity\Atelier;
 use App\Entity\Categorie;
 use App\Entity\Formation;
@@ -16,23 +16,23 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class DureeType extends AbstractType
+class PossederType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('ateliers', EntityType::class,[
-            'class' => Atelier::class,
+        ->add('materiels', EntityType::class,[
+            'class' => Materiel::class,
             'label' =>false,
             'query_builder' => function (EntityRepository $er){
-                return $er->createQueryBuilder('a')
-                ->orderBy('a.nomAtelier','ASC');
+                return $er->createQueryBuilder('m')
+                ->orderBy('m.Intitule','ASC');
             },
 
             
             
             ])
-         ->add('nbJour', IntegerType::class);
+         ->add('quantite', IntegerType::class);
            
     
 }

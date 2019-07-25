@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    
+    <h2>{{salle.nomSalle}}</h3>
+    {{form_start(form)}}
+
+        <input type="hidden" id"maxNb" value=30>
+
+        <ul id="gestionMateriels" data-prototype= "{{ form_row(form.posseder.vars.prototype)|e('html_attr') }}">
+        {% for atelier in form.duree %}
+            <li>{{ form_row(materiel) }}</li>
+        {% endfor %}
+    </ul>
+      {{form_row(form.submit) }}
+{{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="/js/collectionHandlerPosseder.js"></script>
+{% endblock %}

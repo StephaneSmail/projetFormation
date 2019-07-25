@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
 
-<img src= "https://i0.wp.com/www.tom.travel/wp-content/uploads/2019/04/La-SNCF-offre-une-formation-de-developpeur-web-avec-embauche-a-la-cle.jpg?ssl=1" class="card-img-top" alt="..." style="width:50em; height:40em;">
+<img src= "https://www.cse-guide.fr/medias/2018/04/vote-et-salle-20.jpg " class="card-img-top" alt="..." style="width:auto; height:40em ;" >
+   
+    {% for message in app.flashes('notif') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     {% for message in app.flashes('success') %}
         <div class="flash-notice alert alert-success" role="alert">
@@ -12,8 +17,7 @@
         </div>
     {% endfor %}
 
-
-    {% if is_granted('ROLE_ADMIN') %}
+     {% if is_granted('ROLE_ADMIN') %}
 
     <a href="{{ path('salle_new') }}" class="btn btn-primary">Créer une nouvelle salle</a>
 
@@ -21,15 +25,16 @@
 
     <table class="table table-striped">
         <thead>
-            <tr>
-               
-                <th>NomSalle</th>
-                <th>Nbplaces</th>
+        <tr>
+
+                <th>Nom de la salle</th>
+                <th>Nombre de places</th>
+
 
                 {% if is_granted('ROLE_ADMIN') %}
 
-                <th>Modifier</th>
-                <th>Supprimer</th>
+                <th colspan = '2'></th>  
+
 
                 {% endif %}
             </tr>
@@ -39,20 +44,18 @@
             <tr>
                 
                 <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nomSalle }}</a></td>
-
-                <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nbPlaces }}</a></td>
-
-
-
+                <td><a href="{{ path('salle_show', {'id': salle.id}) }}">{{ salle.nbPlace }}</a></td>
+                
                 
                 
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td>
-                        <a href="{{ path('salle_edit', {'id': salle.id}) }}">Modifier</a>
-                    </td>
-                    <td>
-                        {{ include('salle/delete_form.html.twig') }}
-                    </td>
+                <td>
+                    <a href="{{ path('salle_edit', {'id': salle.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i>
+                </td>
+                <td>
+                    {{ include('salle/delete_form.html.twig') }}
+                </td>
+                
                 {% endif %}
             </tr>
         {% else %}
@@ -62,6 +65,3 @@
         {% endfor %}
         </tbody>
     </table>
-
-  
-{% endblock %}
