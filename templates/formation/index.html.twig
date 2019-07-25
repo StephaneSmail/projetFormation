@@ -24,15 +24,15 @@
     {% endif %}
 
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
         <tr>
 
                 <th>Intitulé</th>
+                <th>Information</th>
 
                 {% if is_granted('ROLE_ADMIN') %}
-
-                <th colspan = '2'></th>  
+                <th colspan='2'>Modifier</th>
 
 
                 {% endif %}
@@ -45,7 +45,7 @@
                 <td><a href="{{ path('formation_show', {'id': formation.id}) }}">{{ formation.nomFormation }}</a></td>
                 
                 <td>   
-                    <a href="{{ path('formation_pdf', {'id': formation.id}) }}">PDF</a>
+                    <a href="{{ path('formation_pdf', {'id': formation.id}) }}">React</a>
                 </td>
                 
                 {% if is_granted('ROLE_ADMIN') %}

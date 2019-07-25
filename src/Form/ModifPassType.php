@@ -32,7 +32,7 @@ class ModifPassType extends AbstractType{
             ]),
             'required' => true
         ))
-        ->add('submit', SubmitType::class, ['label'=>'Modifier le mot de passe', 'attr'=>['class'=>'btn-primary btn-block']]);
+        ->add('submit', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']]);
 
     }
 

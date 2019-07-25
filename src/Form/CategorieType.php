@@ -16,7 +16,7 @@ class CategorieType extends AbstractType{
         $builder
             ->add('nomCategorie', TextType::class)
            
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']]);
+            ->add('submit', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

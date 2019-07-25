@@ -49,7 +49,7 @@ class StagiaireType extends AbstractType
                 ]),
             
             ))
-            ->add('submit', SubmitType::class, ['label'=>'Inscrire', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('submit', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']])
             
         ;
     }

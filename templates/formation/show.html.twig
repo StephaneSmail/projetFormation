@@ -11,10 +11,10 @@
   <p>ATELIERS DE LA FORMATION: 
     {% for atelier in formation.duree %}
         {{ atelier }}
-    {% endfor %}</p>
+    {% endfor %} <a class="btn btn-warning btn-sm" href="{{ path('add_duree', {'id': formation.id}) }}" role="button"> Modifier les ateliers </a></p>
 
-  <a class="btn btn-warning btn-lg" href="{{ path('add_duree', {'id': formation.id}) }}" role="button">Modifier atelier </a>
-  <a class="btn btn-primary btn-lg" href="{{ path('formation_index') }}" role="button">Retour liste formations</a>
+  
+  <a class="btn btn-primary btn-lg" href="{{ path('formation_index') }}" role="button">Liste des formations</a>
 </div>
 
 
