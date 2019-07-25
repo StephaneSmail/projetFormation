@@ -3,6 +3,8 @@
 
 {% block body %}
 
+<img src= "http://www.devsoft.ca/wp-content/uploads/2017/06/formation.jpg  " class="card-img-top" alt="..." style="width:auto; height:40em;"  >
+    
     {% for message in app.flashes('success') %}
         <div class="flash-notice alert alert-success" role="alert">
             {{ message }}
@@ -21,8 +23,8 @@
                 <th>Promotion</th>
                 <th>Date de début</th>
                 <th>Date de Fin</th>
-                <th>Nombre de place restante</th>
-                <th>Nombre de place dans la formation</th>
+                <th>Nombre de place(s) restante(s)</th>
+                <th>Nombre de place(s) dans la formation</th>
 
                 {% if is_granted('ROLE_ADMIN') %}
 
@@ -47,7 +49,7 @@
                 
                 {% if is_granted('ROLE_ADMIN') %}
 
-                <td><a href="{{ path('session_edit', {'id':session.id}) }}"class="btn btn-success"><i class="fas fa-edit"></i></td>
+                <td><a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></td>
                 <td>{{ include('session/delete.html.twig') }}</td>
 
                 {% endif %}

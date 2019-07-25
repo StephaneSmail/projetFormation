@@ -82,7 +82,7 @@ class Duree
 
     public function __ToString(){
         return 
-        $this->getAteliers().''.$this->getNbJour();
+        $this->getAteliers().': '.$this->getNbJour(). ' jour(s),';
         
     }
 }

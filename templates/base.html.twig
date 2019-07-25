@@ -41,49 +41,47 @@
 
       {% endif %}
 
+      <img src= "https://www.fashioncentral.pk/wp-content/uploads/2017/02/Designers/Logo.jpg" alt="..." style="width:auto; height:8em; ">
       
-
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
         
-          <li class="nav-item active">
-            <a class="nav-link" href="">Accueil</a>
-          </li>
+          
 
           {% if is_granted('ROLE_USER') %}
 
           
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('formation_index') }}">Formations</a>
+            <a class="nav-link" href="{{ path('formation_index') }}">FORMATIONS</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('session_index') }}">Sessions</a>
+            <a class="nav-link" href="{{ path('session_index') }}">SESSIONS</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('stagiaire_index') }}">Stagiaires</a>
+            <a class="nav-link" href="{{ path('stagiaire_index') }}">STAGIAIRES</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('user_index') }}">Formateurs</a>
+            <a class="nav-link" href="{{ path('user_index') }}">FORMATEURS</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('atelier_index') }}">Atelier</a>
+            <a class="nav-link" href="{{ path('atelier_index') }}">ATELIER</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('categorie_index') }}">Categorie</a>
+            <a class="nav-link" href="{{ path('categorie_index') }}">CATEGORIE</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('salle_index') }}">Ressources</a>
+            <a class="nav-link" href="{{ path('salle_index') }}">RESSOURCES</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+            <a class="nav-link" href="{{ path('app_logout') }}">DECONNEXION</a>
           </li>
         </ul>
 
@@ -100,9 +98,11 @@
       </li>
     </nav>
     
-
+    <div class = "container">
         {% block body %}
+
         {% endblock %}
+    </div>
 
 
         {% block javascripts %}

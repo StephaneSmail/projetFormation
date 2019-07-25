@@ -2,6 +2,8 @@
 
 
 {% block body %}
+
+<img src= "https://blogdroiteuropeen.files.wordpress.com/2018/10/enseignement-numerique.jpg" class="card-img-top" alt="..." style="width:50em; height:40em;" >
     {% for message in app.flashes('succes') %}
         <div class="flash-notice alert laert-success" role="alert">
             {{ message }}
@@ -23,7 +25,7 @@
                 {% if is_granted('ROLE_ADMIN') %}
 
                 <th>Modifier</th>
-                <th>Supprimer</th>
+               
 
                 {% endif %}
             </tr>
@@ -38,7 +40,7 @@
                 
                 {% if is_granted('ROLE_ADMIN') %}
 
-                <td><a href="{{ path('atelier_edit', {'id':atelier.id}) }}" class="btn btn-warning"> Modifier</a></td>
+                <td><a href="{{ path('atelier_edit', {'id':atelier.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></td>
                 <td>{{ include('atelier/delete.html.twig') }}</td>
 
                 {% endif %}
