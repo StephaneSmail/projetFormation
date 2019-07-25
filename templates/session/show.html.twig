@@ -41,14 +41,14 @@
             <td>
                 <a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
             </td>
-            {% if session.dateFin|date() %}
+            {% if date(session.dateFin) > date() %}
              
                 <td>
                     <a href="{{ path('stagiaire_pdf', {'id': stagiaire.id,'id_session': session.id}) }}">PDF</a>
                 </td>
 
             {% endif %}
-            
+
             {% endfor %}
                 
             </tr>
