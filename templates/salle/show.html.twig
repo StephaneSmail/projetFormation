@@ -2,25 +2,20 @@
 
 
 {% block body %}
-    <h1>Salle</h1>
+    
 
-    <table class="table">
-        <tbody>
-           
-            <tr>
-                <th>NomSalle</th>
-                <td>{{ salle.nomSalle }}</td>
-            </tr>
-            <tr>
-                <th>Nbplaces</th>
-                <td>{{ salle.nbplaces }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('salle_index') }}">back to list</a>
+    <div class="jumbotron">
+  <h1 class="display-4">{{ salle.nomSalle }}</h1>
+  <p class="lead">{{ salle.nbplaces }}</p>
+  <hr class="my-4">
+  <p>Materiels dans la salle: {% for materiel in salle.posseder %}
+                    {{ materiel }}
+                {% endfor %}</p>
+  
+  <a class="btn btn-warning btn-lg" href="{{ path('add_posseder', {'id': salle.id}) }}" role="button">Modifier matériels </a>
+  <a class="btn btn-primary btn-lg" href="{{ path('salle_index') }}" role="button">Retour liste des salles</a>
+</div>
 
-    <a href="{{ path('salle_edit', {'id': salle.id}) }}">edit</a>
 
-    {{ include('salle/delete_form.html.twig') }}
 {% endblock %}

@@ -36,9 +36,15 @@ class Salle
      */
     private $nbplaces;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="salles")
+     */
+    private $posseders;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+        $this->posseders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +101,37 @@ class Salle
             // set the owning side to null (unless already changed)
             if ($session->getSalle() === $this) {
                 $session->setSalle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Posseder[]
+     */
+    public function getPosseders(): Collection
+    {
+        return $this->posseders;
+    }
+
+    public function addPosseder(Posseder $posseder): self
+    {
+        if (!$this->posseders->contains($posseder)) {
+            $this->posseders[] = $posseder;
+            $posseder->setSalles($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosseder(Posseder $posseder): self
+    {
+        if ($this->posseders->contains($posseder)) {
+            $this->posseders->removeElement($posseder);
+            // set the owning side to null (unless already changed)
+            if ($posseder->getSalles() === $this) {
+                $posseder->setSalles(null);
             }
         }
 

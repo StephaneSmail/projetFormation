@@ -7,6 +7,8 @@ use App\Form\SalleType;
 use App\Repository\SalleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -82,7 +84,7 @@ class SalleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Vous avez bien modifié la salle');
+            $this->addFlash('success', 'Vous avez bien modifié le stock de matériel');
 
             $entityManager->flush();
 
@@ -112,5 +114,31 @@ class SalleController extends AbstractController
         }
 
         return $this->redirectToRoute('salle_index');
+    }
+
+  /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/addMateriel/{id}", name= "add_materiel" )
+     */
+    public function addMaterielToSalle ( Salle $salle, Request $request, ObjectManager $manager): Response{
+           
+        $form = $this->createForm('App\Form\MaterielsType', $salle);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            
+            $manager->persist($salle);            
+            
+            $manager->flush();
+
+            return $this->redirectToRoute('salle_index');
+        }
+
+        return $this->render('posseder/addMateriel.html.twig', [
+            'salle' => $salle,
+            'form' => $form->createView(),
+        ]);
     }
 }
