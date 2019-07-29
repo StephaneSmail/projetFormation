@@ -23,29 +23,30 @@ class RegistrationController extends AbstractController
      */
     public function register(ObjectManager $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        // 1) build the form
+        // 1) Création du formulaire et de l'objet USER
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        // 2) handle the submit (will only happen on POST)
+        // 2) On saisie la requete du formulaire
         $form->handleRequest($request);
+        // Si il est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // 3) Encode the password (you could also do this via Doctrine listener)
+            // 3) On hash le mdp
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 ) 
             );  
-            // 4) save the User!
+            // 4) On sauve le user
             $entityManager->persist($user);
             $entityManager->flush();
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            //Message pour confirmé l'inscription
             $this->addFlash('success', 'Le compte à bien été enregistré');
-
+            // On renvoie sur l'index des utilisateurs
             return $this->redirectToRoute('user_index');
         }
 
+        // On crée la vue par défaut
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView(), 
             'title' => 'Inscription'
