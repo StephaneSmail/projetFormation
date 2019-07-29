@@ -3,7 +3,7 @@
 
 {% block body %}
 
-<img src= "https://www.cse-guide.fr/medias/2018/04/vote-et-formation-20.jpg " class="card-img-top" alt="..." style="width:auto; height:40em ;" >
+<img src= " https://www.cse-guide.fr/medias/2018/04/vote-et-formation-20.jpg" class="card-img-top" alt="..." style="width:50em; height:40em ;" >
    
     {% for message in app.flashes('notif') %}
         <div class="flash-notice alert alert-success" role="alert">
@@ -45,7 +45,7 @@
                 <td><a href="{{ path('formation_show', {'id': formation.id}) }}">{{ formation.nomFormation }}</a></td>
                 
                 <td>   
-                    <a href="{{ path('formation_pdf', {'id': formation.id}) }}">React</a>
+                    <a href="{{ path('formation_pdf', {'id': formation.id}) }}">R.E.A.C</a>
                 </td>
                 
                 {% if is_granted('ROLE_ADMIN') %}
